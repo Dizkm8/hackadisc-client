@@ -38,8 +38,8 @@ const Login = () => {
               registerFunc={register("rutInput", {
                 required: "Debes ingresar tu RUT",
                 minLength: {
-                  value: 8,
-                  message: "El RUT debe tener al menos 8 caracteres",
+                  value: 11,
+                  message: "El RUT debe tener al menos 11 caracteres",
                 },
                 maxLength: {
                   value: 12,
@@ -64,14 +64,6 @@ const Login = () => {
               placeholder="******"
               registerFunc={register("passwordInput", {
                 required: "Debes ingresar tu contraseña",
-                minLength: {
-                  value: 6,
-                  message: "La contraseña debe tener al menos 6 caracteres",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "La contraseña debe tener máximo 20 caracteres",
-                },
               })}
               color={errors.passwordInput?.message ? "failure" : "normal"}
               errorText={errors.passwordInput?.message}

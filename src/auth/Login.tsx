@@ -1,6 +1,7 @@
-import { Label, TextInput } from "flowbite-react";
+import { Label } from "flowbite-react";
 import CButton from "../common/components/CButton";
 import { SubmitHandler, useForm } from "react-hook-form";
+import CTextInput from "../common/components/CTextInput";
 
 type LoginInputs = {
   rutInput: string;
@@ -30,21 +31,23 @@ const Login = () => {
             <div className="block">
               <Label htmlFor="rut-input" value="Tu RUT" className="text-lg" />
             </div>
-            <TextInput
+            <CTextInput
               id="rut-input"
               type="text"
               placeholder="20.767.691-k"
-              {...register("rutInput", {
+              registerFunc={register("rutInput", {
                 required: "Debes ingresar tu RUT",
-                minLength: 8,
-                maxLength: 20,
+                minLength: {
+                  value: 8,
+                  message: "El RUT debe tener al menos 8 caracteres",
+                },
+                maxLength: {
+                  value: 12,
+                  message: "El RUT debe tener máximo 12 caracteres",
+                },
               })}
-              color={errors.rutInput?.message ? "failure" : "gray"}
-              helperText={
-                errors.rutInput && (
-                  <span className="font-medium">{errors.rutInput.message}</span>
-                )
-              }
+              color={errors.rutInput?.message ? "failure" : "normal"}
+              errorText={errors.rutInput?.message}
             />
           </div>
           <div>
@@ -55,28 +58,27 @@ const Login = () => {
                 className="text-lg"
               />
             </div>
-
-            <TextInput
+            <CTextInput
               id="password-input"
               type="password"
-              placeholder="****"
-              {...register("passwordInput", {
+              placeholder="******"
+              registerFunc={register("passwordInput", {
                 required: "Debes ingresar tu contraseña",
-                minLength: 8,
-                maxLength: 20,
+                minLength: {
+                  value: 6,
+                  message: "La contraseña debe tener al menos 6 caracteres",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "La contraseña debe tener máximo 20 caracteres",
+                },
               })}
-              color={errors.passwordInput?.message ? "failure" : "gray"}
-              helperText={
-                errors.passwordInput && (
-                  <span className="font-medium">
-                    {errors.passwordInput.message}
-                  </span>
-                )
-              }
+              color={errors.passwordInput?.message ? "failure" : "normal"}
+              errorText={errors.passwordInput?.message}
             />
           </div>
           <CButton type="submit" className="mt-3">
-            Submit
+            Iniciar Sesión
           </CButton>
         </form>
       </div>

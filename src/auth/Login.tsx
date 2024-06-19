@@ -2,6 +2,7 @@ import { Label } from "flowbite-react";
 import CButton from "../common/components/CButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../common/components/CTextInput";
+import { useNavigate } from "react-router-dom";
 
 type LoginInputs = {
   rutInput: string;
@@ -14,7 +15,12 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInputs>();
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+    console.log(data);
+    navigate("/home");
+  };
 
   return (
     <div className="h-dvh w-screen flex justify-center items-center">

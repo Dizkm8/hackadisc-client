@@ -7,6 +7,7 @@ const Login = () => {
       <h1 className="text-7xl mb-2">
         Re<span className=" text-pignus-500">haviour</span>
       </h1>
+      <img src="/logo-pignus.webp" alt="Logo Pignus" className="w-[180px]" />
       <form className="flex w-full sm:w-full md:w-3/6 lg:w-1/3 flex-col gap-4">
         <div>
           <div className="block">
@@ -24,7 +25,9 @@ const Login = () => {
           </div>
           <TextInput id="password-input" type="password" placeholder="****" />
         </div>
-        <CButton type="submit" className="mt-3">Submit</CButton>
+        <CButton type="submit" className="mt-3">
+          Submit
+        </CButton>
       </form>
     </div>
   );

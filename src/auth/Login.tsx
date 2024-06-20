@@ -4,7 +4,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../common/components/CTextInput";
 import { useNavigate } from "react-router-dom";
 import { homePath } from "../common/router/routes-paths";
-import useStorage from "../common/hooks/useStorage";
 
 type LoginInputs = {
   rutInput: string;
@@ -18,10 +17,8 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginInputs>();
   const navigate = useNavigate();
-  const { setCurrentPath } = useStorage();
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    setCurrentPath(homePath);
     navigate(homePath);
   };
 

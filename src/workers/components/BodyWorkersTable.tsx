@@ -89,15 +89,12 @@ const getRows = (workersData: Worker[], defaultCheckbox: boolean) =>
           <div className="flex items-center space-x-4">
             <CButton
               href={getDetailButtonPath(rut)}
-              className="flex items-center text-white bg-pignusBlue-500 hover:bg-pignusBlue-800 focus:ring-4 focus:ring-pignusBlue-300"
+              className=" text-white bg-pignusBlue-500 hover:bg-pignusBlue-800 focus:ring-4 focus:ring-pignusBlue-300"
             >
               <EditIcon />
               {seeText}
             </CButton>
-            <CButton
-              colorType="outline"
-              className="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4"
-            >
+            <CButton colorType="outline">
               <DeleteIcon />
               {deleteText}
             </CButton>

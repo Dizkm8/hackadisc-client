@@ -8,17 +8,18 @@ type CButtonProps = ButtonProps & {
 const CButton: React.FC<CButtonProps> = ({
   colorType = "solid",
   loading,
+  className,
   ...props
 }) => {
   const colorClassName =
     colorType === "solid"
-      ? "bg-pignus-500 enabled:hover:bg-pignus-700 focus:ring-pignus-300"
-      : "bg-transparent text-pignus-500 border border-pignus-500 enabled:hover:bg-red-700 focus:ring-red-300";
+      ? "text-white bg-pignus-500 border-transparent enabled:hover:bg-pignus-700 focus:ring-pignus-300"
+      : "bg-transparent text-red-700 hover:text-white border-red-500 enabled:hover:bg-red-700 focus:ring-red-300";
 
   return (
     <Button
       {...props}
-      className={`border border-transparent ${colorClassName} text-white focus:ring-4 p-0 ${props.className}`}
+      className={`border ${colorClassName} p-0 ${className} transition-colors duration-100`}
     />
   );
 };

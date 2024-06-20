@@ -6,7 +6,7 @@ import { useState } from "react";
 const workersData = [
   {
     name: "Juanito Perez",
-    rut: "20.017.691-8",
+    rut: "20017691-8",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "A",
@@ -16,7 +16,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "20.767.851-1",
+    rut: "20767851-1",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "B",
@@ -26,7 +26,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "20.537.391-8",
+    rut: "20537391-8",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "C",
@@ -36,7 +36,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "10.767.661-8",
+    rut: "10767661-8",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "D",
@@ -46,7 +46,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "20.767.121-8",
+    rut: "20767121-8",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "B",
@@ -56,7 +56,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "20.962.691-8",
+    rut: "20962691-8",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "A",
@@ -66,7 +66,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "20.767.661-0",
+    rut: "20767661-0",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "D",
@@ -76,7 +76,7 @@ const workersData = [
   },
   {
     name: "Juanito Perez",
-    rut: "21.767.691-8",
+    rut: "21767691-8",
     email: "juanito.perez@alumnos.ucn.cl",
     enterprise: "Thermosolutions",
     qualification: "C",

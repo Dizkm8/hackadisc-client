@@ -2,6 +2,7 @@ import { Label } from "flowbite-react";
 import CCheckbox from "../../common/components/CCheckbox";
 import DeleteIcon from "../../common/components/DeleteIcon";
 import EditIcon from "../../common/components/EditIcon";
+import CButton from "../../common/components/CButton";
 
 const getQualificationColor = (qualification: string) => {
   switch (qualification) {
@@ -30,6 +31,8 @@ const getStatusColor = (status: string) => {
       return "text-black dark:text-white";
   }
 };
+
+const getDetailButtonPath = (rut: string) => `/trabajadores/${rut}`;
 
 const getRows = (workersData: Worker[], defaultCheckbox: boolean) =>
   workersData.map(
@@ -84,14 +87,20 @@ const getRows = (workersData: Worker[], defaultCheckbox: boolean) =>
         <td className={commonRowClassName}>{area}</td>
         <td className={commonRowClassName}>
           <div className="flex items-center space-x-4">
-            <button className="py-2 px-3 flex items-center text-sm font-small text-center text-white bg-pignusBlue-500 rounded-lg hover:bg-pignusBlue-800 focus:ring-4 focus:outline-none focus:ring-pignusBlue-300">
+            <CButton
+              href={getDetailButtonPath(rut)}
+              className="flex items-center text-white bg-pignusBlue-500 hover:bg-pignusBlue-800 focus:ring-4 focus:ring-pignusBlue-300"
+            >
               <EditIcon />
               {seeText}
-            </button>
-            <button className="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-small rounded-lg text-sm px-3 py-2 text-center">
+            </CButton>
+            <CButton
+              colorType="outline"
+              className="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4"
+            >
               <DeleteIcon />
               {deleteText}
-            </button>
+            </CButton>
           </div>
         </td>
       </tr>

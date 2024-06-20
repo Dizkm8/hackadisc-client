@@ -3,21 +3,6 @@ import CCheckbox from "../../common/components/CCheckbox";
 import DeleteIcon from "../../common/components/DeleteIcon";
 import EditIcon from "../../common/components/EditIcon";
 
-interface Worker {
-  name: string;
-  rut: string;
-  email: string;
-  enterprise: string;
-  qualification: string;
-  status: string;
-  position: string;
-  area: string;
-}
-
-interface Props {
-  data: Worker[];
-}
-
 const getQualificationColor = (qualification: string) => {
   switch (qualification) {
     case "A":
@@ -46,11 +31,8 @@ const getStatusColor = (status: string) => {
   }
 };
 
-const seeText = "Ver";
-const deleteText = "Borrar";
-
-const BodyWorkersTable = ({ data }: Props) => {
-  const rows = data.map(
+const getRows = (workersData: Worker[], defaultCheckbox: boolean) =>
+  workersData.map(
     ({
       name,
       rut,
@@ -67,23 +49,18 @@ const BodyWorkersTable = ({ data }: Props) => {
       >
         <td className="p-4 w-4">
           <div className="flex items-center">
-            <CCheckbox id={rut + name + "checkbox"} />
-            <Label htmlFor={rut + name + "checkbox"} />
+            <CCheckbox
+              id={rut + "-checkbox"}
+              defaultChecked={defaultCheckbox}
+            />
+            <Label htmlFor={rut + "-checkbox"} />
           </div>
         </td>
 
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
-          {name}
-        </td>
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
-          {rut}
-        </td>
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
-          {email}
-        </td>
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
-          {enterprise}
-        </td>
+        <td className={commonRowClassName}>{name}</td>
+        <td className={commonRowClassName}>{rut}</td>
+        <td className={commonRowClassName}>{email}</td>
+        <td className={commonRowClassName}>{enterprise}</td>
         <td className="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
           <div className="flex items-center font-medium">
             <div
@@ -103,13 +80,9 @@ const BodyWorkersTable = ({ data }: Props) => {
             {status}
           </span>
         </td>
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
-          {position}
-        </td>
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
-          {area}
-        </td>
-        <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
+        <td className={commonRowClassName}>{position}</td>
+        <td className={commonRowClassName}>{area}</td>
+        <td className={commonRowClassName}>
           <div className="flex items-center space-x-4">
             <button className="py-2 px-3 flex items-center text-sm font-small text-center text-white bg-pignusBlue-500 rounded-lg hover:bg-pignusBlue-800 focus:ring-4 focus:outline-none focus:ring-pignusBlue-300">
               <EditIcon />
@@ -124,6 +97,30 @@ const BodyWorkersTable = ({ data }: Props) => {
       </tr>
     )
   );
+
+const seeText = "Ver";
+const deleteText = "Borrar";
+const commonRowClassName =
+  "px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white";
+
+interface Worker {
+  name: string;
+  rut: string;
+  email: string;
+  enterprise: string;
+  qualification: string;
+  status: string;
+  position: string;
+  area: string;
+}
+
+interface Props {
+  workersData: Worker[];
+  isMainCheck: boolean;
+}
+
+const BodyWorkersTable = ({ workersData, isMainCheck }: Props) => {
+  const rows = getRows(workersData, isMainCheck);
 
   return <tbody>{rows}</tbody>;
 };

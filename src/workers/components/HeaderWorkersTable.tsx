@@ -8,15 +8,16 @@ interface Column {
 
 interface Props {
   columns: Column[];
+  updateMainCheck: (isChecked: boolean) => void;
 }
 
-const HeaderWorkersTable = ({ columns }: Props) => {
+const HeaderWorkersTable = ({ columns, updateMainCheck }: Props) => {
   return (
     <thead className="uppercase text-xs  text-center font-bold text-white bg-pignusBlue-500 dark:bg-pignusBlue-500 dark:text-white">
       <tr>
         <th scope="col" className="p-4">
           <div className="flex items-center">
-            <CCheckbox id="checkbox-all" />
+            <CCheckbox id="checkbox-all" onClick={updateMainCheck} />
             <Label htmlFor="checkbox-all" />
           </div>
         </th>

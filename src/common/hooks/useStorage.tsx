@@ -8,6 +8,7 @@ interface StorageState {
 
 const defaultState = {
   token: undefined,
+  currentCheckIDs: [],
 };
 
 const useStorage = create<StorageState>()(
@@ -18,6 +19,7 @@ const useStorage = create<StorageState>()(
     }),
     {
       name: "rehaviour-storage",
+      partialize: (state) => ({ token: state.token }),
     }
   )
 );

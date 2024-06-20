@@ -1,6 +1,7 @@
 import DropdownIcon from "../../common/components/DropdownIcon";
 import HeaderWorkersTable from "./HeaderWorkersTable";
 import BodyWorkersTable from "./BodyWorkersTable";
+import { useState } from "react";
 
 const workersData = [
   {
@@ -128,6 +129,12 @@ const searchInputPlaceholder = "Buscar trabajador...";
 const actionsText = "Acciones";
 
 const WorkersTable = () => {
+  const [isMainChecked, setIsMainChecked] = useState(false);
+
+  const updateMainCheck = (isChecked: boolean) => {
+    setIsMainChecked(isChecked);
+  };
+
   return (
     <section className="mx-auto max-w-screen-2xl md:px-4 lg:px-12">
       <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mx-5">
@@ -196,8 +203,14 @@ const WorkersTable = () => {
         </div>
         <div className="overflow-x-auto ">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <HeaderWorkersTable columns={columns} />
-            <BodyWorkersTable data={workersData} />
+            <HeaderWorkersTable
+              columns={columns}
+              updateMainCheck={updateMainCheck}
+            />
+            <BodyWorkersTable
+              workersData={workersData}
+              isMainCheck={isMainChecked}
+            />
           </table>
         </div>
         <nav

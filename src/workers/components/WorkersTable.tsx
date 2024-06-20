@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DropdownIcon from "../../common/components/DropdownIcon";
 import HeaderWorkersTable from "./HeaderWorkersTable";
 import BodyWorkersTable from "./BodyWorkersTable";
@@ -129,8 +128,6 @@ const searchInputPlaceholder = "Buscar trabajador...";
 const actionsText = "Acciones";
 
 const WorkersTable = () => {
-  const [showCreateWorkerModal, setShowCreateWorkerModal] = useState(false);
-
   return (
     <section className="mx-auto max-w-screen-2xl md:px-4 lg:px-12">
       <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mx-5">

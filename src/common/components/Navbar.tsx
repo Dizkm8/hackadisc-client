@@ -49,9 +49,14 @@ const Navbar = () => {
     navigate(loginPath);
   };
 
+  const onBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate(homePath);
+  };
+
   return (
     <FlowbiteNavbar fluid rounded className=" bg-pignusBlue-500 rounded-none">
-      <FlowbiteNavbar.Brand href={homePath} onClick={(e) => e.preventDefault()}>
+      <FlowbiteNavbar.Brand href={homePath} onClick={onBrandClick}>
         <img src={pignusLogoSrc} className="mr-3 h-6" alt="Logo Pignus" />
       </FlowbiteNavbar.Brand>
       <div className="flex md:order-2">

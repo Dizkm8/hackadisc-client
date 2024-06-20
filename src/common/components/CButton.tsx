@@ -1,8 +1,10 @@
 import { Button, ButtonProps } from "flowbite-react";
 
-type CButtonProps = ButtonProps & {};
+type CButtonProps = ButtonProps & {
+  loading?: boolean;
+};
 
-const CButton: React.FC<CButtonProps> = (props) => {
+const CButton: React.FC<CButtonProps> = ({ loading, ...props }) => {
   return (
     <Button
       {...props}

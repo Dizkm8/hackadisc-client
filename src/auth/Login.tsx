@@ -1,15 +1,20 @@
-import { Label } from "flowbite-react";
+import { Label, Spinner } from "flowbite-react";
 import CButton from "../common/components/CButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../common/components/CTextInput";
 import { useNavigate } from "react-router-dom";
 import { homePath } from "../common/router/routes-paths";
 import agent from "../api/agent";
+import { useState } from "react";
 
 type LoginInputs = {
   rutInput: string;
   passwordInput: string;
 };
+
+const spinner = (
+  <Spinner aria-label="Cargando..." className=" fill-pignusBlue-300" />
+);
 
 const Login = () => {
   const {
@@ -18,16 +23,24 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginInputs>();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  const disableInput = () => {
+    setLoading(true);
+  };
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     const { rutInput: username, passwordInput: password } = data;
     agent.Auth.login({ username, password })
       .then((response) => {
-        console.log(response);
+        disableInput();
         navigate(homePath);
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -84,8 +97,8 @@ const Login = () => {
               errorText={errors.passwordInput?.message}
             />
           </div>
-          <CButton type="submit" className="mt-3">
-            Iniciar Sesión
+          <CButton type="submit" className="mt-3" disabled={loading}>
+            {loading ? spinner : "Iniciar Sesión"}
           </CButton>
         </form>
       </div>

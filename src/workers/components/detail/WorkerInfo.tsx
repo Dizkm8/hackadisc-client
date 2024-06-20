@@ -12,7 +12,7 @@ const WorkerInfo = ({ worker, className }: Props) => {
     <div className="w-full h-full">
       <div className="w-min-max h-max flex flex-col-reverse md:flex-row justify-center items-center gap-0 md:gap-5">
         <section
-          className={`flex flex-col p-4 w-full md:w-3/12 gap-4 rounded-lg md:shadow-xl ${className}`}
+          className={`flex flex-col p-4 w-full md:w-3/12 gap-4 md:shadow-xl rounded-2xl md:rounded-lg border-4 border-x-0 md:border-0  ${className}`}
         >
           <h1 className="text-4xl mb-2 md:mb-1 font-semibold leading-none uppercase text-gray-900 dark:text-white">
             {name}
@@ -49,7 +49,7 @@ const WorkerInfo = ({ worker, className }: Props) => {
           </div>
         </section>
         <img
-          className="w-60 h-60 rounded-full mt-5 md:mt-0"
+          className="w-60 h-60 rounded-full mt-5 md:mt-0 md:ml-10"
           src="https://media.licdn.com/dms/image/D4E35AQEu4OzdezYJNA/profile-framedphoto-shrink_400_400/0/1718143845563?e=1719450000&v=beta&t=KQF-xwuJcNXki7xjb-za-gy6DNmOhxJU1D8dK6nNv9E"
         />
       </div>

@@ -68,7 +68,7 @@ const WorkerDetailPage = () => {
 
   return (
     <MainLayout>
-      <WorkerInfo worker={workerInfo} className=" my-10" />
+      <WorkerInfo worker={workerInfo} className="my-10" />
       <WorkerAptitudes aptitudes={aptitudes} />
     </MainLayout>
   );

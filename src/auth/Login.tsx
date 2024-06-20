@@ -15,6 +15,9 @@ type LoginInputs = {
   passwordInput: string;
 };
 
+const rutPlaceholder = "12123123-k";
+const passwordPlaceholder = "******";
+
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isUnAuth, setIsUnAuth] = useState(false);
@@ -33,11 +36,11 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     const { rutInput: username, passwordInput: password } = data;
+    disableInput();
     agent.Auth.login({ username, password })
       .then((response) => {
         const { access } = response;
         setToken(access);
-        disableInput();
         navigate(homePath);
       })
       .catch((error) => {
@@ -72,16 +75,16 @@ const Login = () => {
             <CTextInput
               id="rut-input"
               type="text"
-              placeholder="20.767.691-k"
+              placeholder={rutPlaceholder}
               registerFunc={register("rutInput", {
                 required: "Debes ingresar tu RUT",
                 minLength: {
-                  value: 11,
-                  message: "El RUT debe tener al menos 11 caracteres",
+                  value: 9,
+                  message: "El RUT no debe tener puntos, pero si guión",
                 },
                 maxLength: {
-                  value: 12,
-                  message: "El RUT debe tener máximo 12 caracteres",
+                  value: 10,
+                  message: "El RUT no debe tener puntos, pero si guión",
                 },
               })}
               color={errors.rutInput?.message ? "failure" : "normal"}
@@ -99,7 +102,7 @@ const Login = () => {
             <CTextInput
               id="password-input"
               type="password"
-              placeholder="******"
+              placeholder={passwordPlaceholder}
               registerFunc={register("passwordInput", {
                 required: "Debes ingresar tu contraseña",
               })}

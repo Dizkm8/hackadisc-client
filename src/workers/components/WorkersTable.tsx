@@ -70,7 +70,7 @@ const WorkersTable = () => {
 
   return (
     <section className="mx-auto max-w-screen-2xl md:px-4 lg:px-12">
-      <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mx-5">
+      <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mx-5 mb-10">
         <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
           <div className="w-full md:w-1/2">
             <form className="flex items-center">
@@ -134,7 +134,7 @@ const WorkersTable = () => {
             </div>
           </div>
         </div>
-        <div className="overflow-x-auto ">
+        <div className="overflow-x-auto">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <HeaderWorkersTable
               columns={columns}

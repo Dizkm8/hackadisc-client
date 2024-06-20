@@ -35,6 +35,9 @@ const getStatusColor = (status: string) => {
 
 const getDetailButtonPath = (rut: string) => `/trabajadores/${rut}`;
 
+const commonRowClassName =
+  "px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white text-wrap";
+
 const getRows = (workersData: UserWorker[], defaultCheckbox: boolean) =>
   workersData.map(
     ({
@@ -62,7 +65,7 @@ const getRows = (workersData: UserWorker[], defaultCheckbox: boolean) =>
         </td>
 
         <td className={commonRowClassName}>{name}</td>
-        <td className={commonRowClassName}>{rut}</td>
+        <td className={`${commonRowClassName} text-nowrap`}>{rut}</td>
         <td className={commonRowClassName}>{email}</td>
         <td className={commonRowClassName}>{enterprise}</td>
         <td className="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
@@ -75,9 +78,9 @@ const getRows = (workersData: UserWorker[], defaultCheckbox: boolean) =>
             {qualification}
           </div>
         </td>
-        <td className="px-4 py-3">
+        <td className="px-4 py-3 text-wrap">
           <span
-            className={`text-xs font-medium px-2 py-0.5 rounded ${getStatusColor(
+            className={`text-xs font-medium px-2 py-0.5 rounded text-wrap ${getStatusColor(
               status
             )}`}
           >
@@ -107,8 +110,6 @@ const getRows = (workersData: UserWorker[], defaultCheckbox: boolean) =>
 
 const seeText = "Ver";
 const deleteText = "Borrar";
-const commonRowClassName =
-  "px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white";
 
 interface Props {
   workersData: UserWorker[];

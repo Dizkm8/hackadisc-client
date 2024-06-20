@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { homePath } from "../common/router/routes-paths";
 import agent from "../api/agent";
 import { useState } from "react";
+import useTokenStore from "./hooks/useTokenStore";
 
 type LoginInputs = {
   rutInput: string;
@@ -17,13 +18,14 @@ const spinner = (
 );
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInputs>();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const { setToken } = useTokenStore();
 
   const disableInput = () => {
     setLoading(true);
@@ -33,6 +35,8 @@ const Login = () => {
     const { rutInput: username, passwordInput: password } = data;
     agent.Auth.login({ username, password })
       .then((response) => {
+        const { access } = response;
+        setToken(access);
         disableInput();
         navigate(homePath);
       })

@@ -3,7 +3,7 @@ import Root from "./Root";
 import Login from "../../auth/Login";
 import HomePage from "../../home/Page";
 import { homePath, loginPath, workerDetailPath } from "./routes-paths";
-import WorkerDetailPage from "../../workers/pages/WorkerDetail";
+import WorkerDetailPage from "../../workers/pages/WorkerDetailPage";
 
 const Router = createBrowserRouter([
   {

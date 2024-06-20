@@ -3,6 +3,7 @@ import CCheckbox from "../../common/components/CCheckbox";
 import DeleteIcon from "../../common/components/DeleteIcon";
 import EditIcon from "../../common/components/EditIcon";
 import CButton from "../../common/components/CButton";
+import { UserWorker } from "../models/user-worker";
 
 const getQualificationColor = (qualification: string) => {
   switch (qualification) {
@@ -34,7 +35,7 @@ const getStatusColor = (status: string) => {
 
 const getDetailButtonPath = (rut: string) => `/trabajadores/${rut}`;
 
-const getRows = (workersData: Worker[], defaultCheckbox: boolean) =>
+const getRows = (workersData: UserWorker[], defaultCheckbox: boolean) =>
   workersData.map(
     ({
       name,
@@ -109,19 +110,8 @@ const deleteText = "Borrar";
 const commonRowClassName =
   "px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white";
 
-interface Worker {
-  name: string;
-  rut: string;
-  email: string;
-  enterprise: string;
-  qualification: string;
-  status: string;
-  position: string;
-  area: string;
-}
-
 interface Props {
-  workersData: Worker[];
+  workersData: UserWorker[];
   isMainCheck: boolean;
 }
 

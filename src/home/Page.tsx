@@ -1,12 +1,11 @@
-import Navbar from "../common/components/Navbar";
+import MainLayout from "../common/layout/MainLayout";
 import WorkersPage from "../workers/pages/Page";
 
 const HomePage = () => {
   return (
-    <>
-      <Navbar />
+    <MainLayout>
       <WorkersPage />
-    </>
+    </MainLayout>
   );
 };
 

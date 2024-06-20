@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../common/components/CTextInput";
 import { useNavigate } from "react-router-dom";
 import { homePath } from "../common/router/routes-paths";
+import agent from "../api/agent";
 
 type LoginInputs = {
   rutInput: string;
@@ -19,7 +20,15 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    navigate(homePath);
+    const { rutInput: username, passwordInput: password } = data;
+    agent.Auth.login({ username, password })
+      .then((response) => {
+        console.log(response);
+        navigate(homePath);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

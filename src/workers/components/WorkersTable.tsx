@@ -1,90 +1,11 @@
 import DropdownIcon from "../../common/components/DropdownIcon";
 import HeaderWorkersTable from "./HeaderWorkersTable";
 import BodyWorkersTable from "./BodyWorkersTable";
-import { useState } from "react";
-
-const workersData = [
-  {
-    name: "Juanito Perez",
-    rut: "20017691-8",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "A",
-    status: "Evaluado",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "20767851-1",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "B",
-    status: "Evaluado",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "20537391-8",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "C",
-    status: "Intervenido",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "10767661-8",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "D",
-    status: "Intervenido",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "20767121-8",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "B",
-    status: "En Intervención",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "20962691-8",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "A",
-    status: "En Intervención",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "20767661-0",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "D",
-    status: "En Intervención",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-  {
-    name: "Juanito Perez",
-    rut: "21767691-8",
-    email: "juanito.perez@alumnos.ucn.cl",
-    enterprise: "Thermosolutions",
-    qualification: "C",
-    status: "Intervenido",
-    position: "Ingeniero de Proyectos",
-    area: "Proyectos",
-  },
-];
+import { useEffect, useState } from "react";
+import agent from "../../api/agent";
+import { GetUserWorkerInfoDto } from "../../api/dtos/get-user-worker-info-dto";
+import { manyUserWorkerDtoToModel } from "../../common/services/dto-to-model";
+import { UserWorker } from "../models/user-worker";
 
 const columns = [
   {
@@ -129,7 +50,19 @@ const searchInputPlaceholder = "Buscar trabajador...";
 const actionsText = "Acciones";
 
 const WorkersTable = () => {
+  const [workersData, setWorkersData] = useState<UserWorker[]>([]);
   const [isMainChecked, setIsMainChecked] = useState(false);
+
+  useEffect(() => {
+    agent.UsersWorkers.list()
+      .then((response: GetUserWorkerInfoDto) => {
+        const { results } = response;
+        setWorkersData(manyUserWorkerDtoToModel(results));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const updateMainCheck = (isChecked: boolean) => {
     setIsMainChecked(isChecked);

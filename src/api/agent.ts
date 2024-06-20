@@ -5,7 +5,9 @@ axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token") ?? "";
+  const tokenStrJson = localStorage.getItem("rehaviour-storage") ?? "";
+  const tokenObj = JSON.parse(tokenStrJson);
+  const token = tokenObj?.state?.token as string;
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
@@ -25,6 +27,10 @@ const Auth = {
   login: (form: AuthDto) => requests.post("api/token/", form),
 };
 
-const agent = { Auth };
+const UsersWorkers = {
+  list: () => requests.get("api/workers/"),
+};
+
+const agent = { Auth, UsersWorkers };
 
 export default agent;

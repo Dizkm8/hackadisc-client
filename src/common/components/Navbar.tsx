@@ -1,52 +1,85 @@
 import { Avatar, Dropdown, Navbar as FlowbiteNavbar } from "flowbite-react";
+import { homePath } from "../router/routes-paths";
+
+const userSettingsOpts = ["Mi perfil"];
+const signOutText = "Cerrar Sesión";
+
+const pages = [
+  {
+    name: "Home",
+    href: homePath,
+  },
+  {
+    name: "Sobre Nosotros",
+    href: "/sobre-nosotros",
+  },
+  {
+    name: "Servicios",
+    href: "/servicios",
+  },
+  {
+    name: "Precios",
+    href: "/precios",
+  },
+  {
+    name: "Contacto",
+    href: "/contacto",
+  },
+];
+const userInformation = {
+  name: "Jorge Rivera",
+  email: "bols@pignus.cl",
+  pic: "https://media.licdn.com/dms/image/D4E35AQEu4OzdezYJNA/profile-framedphoto-shrink_400_400/0/1718143845563?e=1719450000&v=beta&t=KQF-xwuJcNXki7xjb-za-gy6DNmOhxJU1D8dK6nNv9E",
+};
+const pignusLogoSrc = "/logo-pignus-dark.webp";
+
+const activePathClassName =
+  "bg-white md:bg-transparent text-pignus-600 hover:!text-pignus-600";
+const notActivePathClassName =
+  "bg-white md:bg-transparent text-white hover:!text-pignus-600";
 
 const Navbar = () => {
+  const activePath = "/inicio";
+
   return (
-    <FlowbiteNavbar fluid rounded>
-      <FlowbiteNavbar.Brand href="https://flowbite-react.com">
-        <img
-          src="/favicon.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite React Logo"
-        />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite React
-        </span>
+    <FlowbiteNavbar fluid rounded className=" bg-pignusBlue-500 rounded-none">
+      <FlowbiteNavbar.Brand href={homePath} onClick={(e) => e.preventDefault()}>
+        <img src={pignusLogoSrc} className="mr-3 h-6" alt="Logo Pignus" />
       </FlowbiteNavbar.Brand>
       <div className="flex md:order-2">
         <Dropdown
           arrowIcon={false}
           inline
           label={
-            <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-              rounded
-            />
+            <Avatar alt="User settings" img={userInformation.pic} rounded />
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
+            <span className="block text-sm">{userInformation.name}</span>
             <span className="block truncate text-sm font-medium">
-              name@flowbite.com
+              {userInformation.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+          {userSettingsOpts.map((page) => (
+            <Dropdown.Item key={page}>{page}</Dropdown.Item>
+          ))}
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item>{signOutText}</Dropdown.Item>
         </Dropdown>
         <FlowbiteNavbar.Toggle />
       </div>
       <FlowbiteNavbar.Collapse>
-        <FlowbiteNavbar.Link href="#" active>
-          Home
-        </FlowbiteNavbar.Link>
-        <FlowbiteNavbar.Link href="#">About</FlowbiteNavbar.Link>
-        <FlowbiteNavbar.Link href="#">Services</FlowbiteNavbar.Link>
-        <FlowbiteNavbar.Link href="#">Pricing</FlowbiteNavbar.Link>
-        <FlowbiteNavbar.Link href="#">Contact</FlowbiteNavbar.Link>
+        {pages.map(({ name, href }) => (
+          <FlowbiteNavbar.Link
+            key={name}
+            href={href}
+            className={
+              href === activePath ? activePathClassName : notActivePathClassName
+            }
+          >
+            {name}
+          </FlowbiteNavbar.Link>
+        ))}
       </FlowbiteNavbar.Collapse>
     </FlowbiteNavbar>
   );

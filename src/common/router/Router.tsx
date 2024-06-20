@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Login from "../../auth/Login";
 import HomePage from "../../home/Page";
-import { homePath, loginPath } from "./routes-paths";
+import { homePath, loginPath, workerDetailPath } from "./routes-paths";
+import WorkerDetailPage from "../../workers/pages/WorkerDetail";
 
 const Router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const Router = createBrowserRouter([
       {
         path: homePath,
         element: <HomePage />,
+      },
+      {
+        path: workerDetailPath,
+        element: <WorkerDetailPage />,
       },
     ],
   },

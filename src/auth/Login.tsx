@@ -1,4 +1,4 @@
-import { Label, Spinner } from "flowbite-react";
+import { Alert, Label } from "flowbite-react";
 import CButton from "../common/components/CButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../common/components/CTextInput";
@@ -7,18 +7,18 @@ import { homePath } from "../common/router/routes-paths";
 import agent from "../api/agent";
 import { useState } from "react";
 import useTokenStore from "./hooks/useTokenStore";
+import { HiInformationCircle } from "react-icons/hi";
+import CSpinner from "../common/components/CSpinner";
 
 type LoginInputs = {
   rutInput: string;
   passwordInput: string;
 };
 
-const spinner = (
-  <Spinner aria-label="Cargando..." className=" fill-pignusBlue-300" />
-);
-
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [isUnAuth, setIsUnAuth] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -42,6 +42,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error);
+        setIsUnAuth(true);
       })
       .finally(() => {
         setLoading(false);
@@ -55,6 +56,11 @@ const Login = () => {
           Re<span className=" text-pignus-500">haviour</span>
         </h1>
         <img src="/logo-pignus.webp" alt="Logo Pignus" className="w-[180px]" />
+        {isUnAuth && (
+          <Alert color="failure" className="w-full" icon={HiInformationCircle}>
+            Credenciales inválidas
+          </Alert>
+        )}
         <form
           className="flex flex-col w-full gap-4"
           onSubmit={handleSubmit(onSubmit)}
@@ -102,7 +108,7 @@ const Login = () => {
             />
           </div>
           <CButton type="submit" className="mt-3" disabled={loading}>
-            {loading ? spinner : "Iniciar Sesión"}
+            {loading ? <CSpinner /> : "Iniciar Sesión"}
           </CButton>
         </form>
       </div>

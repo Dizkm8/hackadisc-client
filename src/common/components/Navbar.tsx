@@ -39,8 +39,6 @@ const notActivePathClassName =
   "bg-white md:bg-transparent text-white hover:!text-pignus-600";
 
 const Navbar = () => {
-  const activePath = "/inicio";
-
   return (
     <FlowbiteNavbar fluid rounded className=" bg-pignusBlue-500 rounded-none">
       <FlowbiteNavbar.Brand href={homePath} onClick={(e) => e.preventDefault()}>
@@ -74,7 +72,9 @@ const Navbar = () => {
             key={name}
             href={href}
             className={
-              href === activePath ? activePathClassName : notActivePathClassName
+              href === window.location.pathname
+                ? activePathClassName
+                : notActivePathClassName
             }
           >
             {name}

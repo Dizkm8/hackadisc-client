@@ -23,7 +23,6 @@ const Login = () => {
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     setCurrentPath(homePath);
     navigate(homePath);
-    console.log(data);
   };
 
   return (

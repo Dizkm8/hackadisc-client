@@ -1,11 +1,11 @@
 import Navbar from "../common/components/Navbar";
-import WorkersTable from "../workers/components/WorkersTable";
+import WorkersPage from "../workers/pages/Page";
 
 const HomePage = () => {
   return (
     <>
       <Navbar />
-      <WorkersTable />
+      <WorkersPage />
     </>
   );
 };

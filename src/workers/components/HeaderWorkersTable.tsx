@@ -12,7 +12,7 @@ interface Props {
 
 const HeaderWorkersTable = ({ columns }: Props) => {
   return (
-    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center font-bold">
+    <thead className="uppercase text-xs  text-center font-bold text-white bg-pignusBlue-500 dark:bg-pignusBlue-500 dark:text-white">
       <tr>
         <th scope="col" className="p-4">
           <div className="flex items-center">

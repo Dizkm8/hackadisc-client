@@ -46,6 +46,9 @@ const getStatusColor = (status: string) => {
   }
 };
 
+const seeText = "Ver";
+const deleteText = "Borrar";
+
 const BodyWorkersTable = ({ data }: Props) => {
   const rows = data.map(
     ({
@@ -108,13 +111,13 @@ const BodyWorkersTable = ({ data }: Props) => {
         </td>
         <td className="px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white">
           <div className="flex items-center space-x-4">
-            <button className="py-2 px-3 flex items-center text-sm font-small text-center text-white bg-pignus-700 rounded-lg hover:bg-pignus-800 focus:ring-4 focus:outline-none focus:ring-pignus-300">
+            <button className="py-2 px-3 flex items-center text-sm font-small text-center text-white bg-pignusBlue-500 rounded-lg hover:bg-pignusBlue-800 focus:ring-4 focus:outline-none focus:ring-pignusBlue-300">
               <EditIcon />
-              Ver
+              {seeText}
             </button>
             <button className="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-small rounded-lg text-sm px-3 py-2 text-center">
               <DeleteIcon />
-              Borrar
+              {deleteText}
             </button>
           </div>
         </td>

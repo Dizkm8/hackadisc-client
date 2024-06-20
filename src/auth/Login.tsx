@@ -35,9 +35,9 @@ const Login = () => {
   };
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    const { rutInput: username, passwordInput: password } = data;
+    const { rutInput: rut, passwordInput: password } = data;
     disableInput();
-    agent.Auth.login({ username, password })
+    agent.Auth.login({ rut, password })
       .then((response) => {
         const { access } = response;
         setToken(access);

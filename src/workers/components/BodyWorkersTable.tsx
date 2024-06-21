@@ -5,34 +5,8 @@ import EditIcon from "../../common/components/EditIcon";
 import CButton from "../../common/components/CButton";
 import { UserWorker } from "../models/user-worker";
 import { UserWorkerCapacitation } from "../models/user-worker-capacitation";
-
-const getQualificationColor = (qualification: string) => {
-  switch (qualification) {
-    case "A":
-      return "bg-pignus-500";
-    case "B":
-      return "bg-pignusBlue-400";
-    case "C":
-      return "bg-yellow-300";
-    case "D":
-      return "bg-red-500";
-    default:
-      return "bg-gray-200";
-  }
-};
-
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "Evaluado":
-      return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-    case "En Intervención":
-      return "bg-pignusBlue-100 text-pignusBlue-800 dark:bg-pignusBlue-900 dark:text-pignusBlue-300";
-    case "Intervenido":
-      return "bg-pignus-200 text-pignus-800 dark:bg-pignus-900 dark:text-pignus-300";
-    default:
-      return "text-black dark:text-white bg-gray-200 dark:bg-gray-800";
-  }
-};
+import { getBgQualificationColorByLetter } from "../../common/utils/get-qualification-color";
+import { getSpanStatusColor } from "../../common/utils/get-status-color";
 
 const getDefaultChecked = (
   workersData: UserWorker | UserWorkerCapacitation,
@@ -76,7 +50,7 @@ const getRows = (
       <td className="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
         <div className="flex items-center font-medium">
           <div
-            className={`h-4 w-4 rounded-full inline-block mr-2 ${getQualificationColor(
+            className={`h-4 w-4 rounded-full inline-block mr-2 ${getBgQualificationColorByLetter(
               worker.qualification
             )}`}
           />
@@ -85,7 +59,7 @@ const getRows = (
       </td>
       <td className="px-4 py-3 text-wrap">
         <span
-          className={`text-xs font-medium px-2 py-0.5 rounded text-nowrap ${getStatusColor(
+          className={`text-xs font-medium px-2 py-0.5 rounded text-nowrap ${getSpanStatusColor(
             worker.status
           )}`}
         >

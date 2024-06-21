@@ -16,8 +16,8 @@ import LoadingSpinner from "../../common/components/LoadingSpinner";
 import ActionButtons from "./ActionButtons";
 import TablePagination from "./TablePagination";
 import { ActivityInformation } from "../models/activity-information";
-import { AptitudeNameType } from "../models/aptitude-name-type";
 import SearchIcon from "../../common/components/SearchIcon";
+import { AptitudeNameType } from "../../common/types/aptitude-name-type";
 
 const columns = [
   {

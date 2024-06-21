@@ -1,4 +1,5 @@
-import { AptitudeNameType } from "../models/aptitude-name-type";
+import { AptitudeNameType } from "../../common/types/aptitude-name-type";
+import { CategoryNameType } from "../../common/types/category-name-type";
 
 export const getAptitudeIdByName = (aptitudeName: AptitudeNameType) => {
   if (aptitudeName === "ADAPTABILITY") return 1;
@@ -10,7 +11,7 @@ export const getAptitudeIdByName = (aptitudeName: AptitudeNameType) => {
   return -1;
 };
 
-export const getCategoryIdByName = (categoryName: string) => {
+export const getCategoryIdByName = (categoryName: CategoryNameType) => {
   if (categoryName === "COURSE") return 1;
   if (categoryName === "TRAINING") return 2;
   if (categoryName === "SPEECH") return 3;

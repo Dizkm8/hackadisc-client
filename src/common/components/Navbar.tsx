@@ -18,7 +18,7 @@ const pages = [
 ];
 const userInformation = {
   name: "Jorge Rivera",
-  email: "bols@pignus.cl",
+  email: "jorge.rivera@pignus.cl",
   pic: "https://media.licdn.com/dms/image/D4E35AQEu4OzdezYJNA/profile-framedphoto-shrink_400_400/0/1718143845563?e=1719450000&v=beta&t=KQF-xwuJcNXki7xjb-za-gy6DNmOhxJU1D8dK6nNv9E",
 };
 const pignusLogoSrc = "/logo-pignus-dark.webp";

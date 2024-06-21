@@ -8,10 +8,11 @@ type Props = {
   errorText?: string;
   className?: string;
   registerFunc?: any;
+  readonly?: boolean;
 };
 
 const CTextInput = React.forwardRef<HTMLInputElement, Props>(
-  ({ className, errorText, registerFunc, ...props }, ref) => {
+  ({ className, errorText, registerFunc, readonly, ...props }, ref) => {
     const normalColor =
       "bg-gray-50 border-gray-300 text-gray-900 focus:ring-pignus-500 focus:border-pignus-500";
     const redColor =
@@ -26,6 +27,7 @@ const CTextInput = React.forwardRef<HTMLInputElement, Props>(
           ref={ref}
           {...registerFunc}
           {...props}
+          readOnly={readonly}
           className={baseClassName}
         />
         {errorText && (

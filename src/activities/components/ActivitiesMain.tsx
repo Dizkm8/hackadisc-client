@@ -42,12 +42,21 @@ const ActivitiesMain = () => {
       .catch((error) => console.error(error));
   };
 
+  const onActivityDetailModalClose = () => {
+    setSelectedActivity(undefined);
+  };
+
   if (loadingData) {
     return <LoadingSpinner />;
   }
   return (
     <>
-      {selectedActivity && <ActivityDetailModal activity={selectedActivity} />}
+      {selectedActivity && (
+        <ActivityDetailModal
+          activity={selectedActivity}
+          onClose={onActivityDetailModalClose}
+        />
+      )}
       <ActivitiesCalendar
         activities={activities}
         onActivityClick={onActivityClick}

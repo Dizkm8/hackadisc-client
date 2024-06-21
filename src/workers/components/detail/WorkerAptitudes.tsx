@@ -1,4 +1,5 @@
 import { MdWorkspacePremium } from "react-icons/md";
+import { getTextQualificationColorByNumber } from "../../../common/utils/get-qualification-color";
 
 interface Aptitude {
   id: string;
@@ -9,22 +10,6 @@ interface Aptitude {
 interface Props {
   aptitudes: Aptitude[];
 }
-
-const getColor = (value: number) => {
-  if (value < 25) {
-    return "text-red-600";
-  }
-  if (value < 50) {
-    return "text-yellow-300";
-  }
-  if (value < 75) {
-    return "text-pignusBlue-300";
-  }
-  if (value <= 100) {
-    return "text-pignus-500";
-  }
-  return "text-black";
-};
 
 const WorkerAptitudes = ({ aptitudes }: Props) => {
   return (
@@ -37,7 +22,7 @@ const WorkerAptitudes = ({ aptitudes }: Props) => {
         {aptitudes.map(({ id, name, value }) => (
           <div key={id} className="flex flex-col items-center justify-center">
             <dt
-              className={`mb-2 text-4xl md:text-5xl font-extrabold ${getColor(
+              className={`mb-2 text-4xl md:text-5xl font-extrabold ${getTextQualificationColorByNumber(
                 value
               )}`}
             >

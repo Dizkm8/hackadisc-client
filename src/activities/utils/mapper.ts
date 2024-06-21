@@ -22,9 +22,9 @@ export const mapDetailActivityDtoToModel = (
   return {
     name: dto.name,
     description: dto.description,
-    date: dto.date,
+    date: new Date(dto.date),
     category: dto.category,
-    competence: dto.competence,
+    aptitude: dto.competence,
     participants: dto.participants.map((participant) => ({
       rut: participant.rut,
       username: participant.user_name,

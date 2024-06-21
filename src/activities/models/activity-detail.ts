@@ -10,6 +10,6 @@ export interface ActivityDetail {
   description: string;
   date: Date;
   category: string;
-  competence: string;
+  aptitude: string;
   participants: RelatedActivityDetailUsers[];
 }

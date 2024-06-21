@@ -15,6 +15,7 @@ import CreateActivityModal from "./CreateActivityModal";
 import { AptitudeNameType, getAptitudeIdByName } from "../utils/utils";
 import { UserWorkerCapacitationDto } from "../../api/dtos/user-worker-capacitation-dto";
 import useStorage from "../../common/hooks/useStorage";
+import LoadingSpinner from "../../common/components/LoadingSpinner";
 
 const columns = [
   {
@@ -68,6 +69,7 @@ interface ActivityInformation {
 }
 
 const WorkersTable = () => {
+  const [dataLoading, setDataLoading] = useState(true);
   const [workersData, setWorkersData] = useState<UserWorker[]>([]);
   const [isMainChecked, setIsMainChecked] = useState(false);
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
@@ -84,6 +86,9 @@ const WorkersTable = () => {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setDataLoading(false);
       });
   }, []);
 
@@ -125,6 +130,10 @@ const WorkersTable = () => {
   const assignActivityAndUsers = () => {
     console.log(workerRuts);
   };
+
+  if (dataLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>

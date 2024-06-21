@@ -30,7 +30,7 @@ const Auth = {
 };
 
 const UsersWorkers = {
-  list: () => requests.get("api/workers/"),
+  list: () => requests.get("api/workers/?limit=100"),
   listByAptitude: (aptitudeId: number) =>
     requests.get(`api/workers/competence/${aptitudeId}/`),
   assignUsersToActivity: (
@@ -42,6 +42,10 @@ const UsersWorkers = {
     }),
 };
 
-const agent = { Auth, UsersWorkers };
+const Activities = {
+  list: () => requests.get("api/interventions/?limit=100"),
+};
+
+const agent = { Auth, UsersWorkers, Activities };
 
 export default agent;

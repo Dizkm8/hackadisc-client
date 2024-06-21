@@ -1,6 +1,7 @@
 import { MdWorkspacePremium } from "react-icons/md";
 import { getTextQualificationColorByNumber } from "../../../common/utils/get-qualification-color";
 import { WorkerDetail } from "../../models/worker-detail";
+import { aptitudesNames } from "../../types/aptitudes-constants";
 
 interface Props {
   worker: WorkerDetail;
@@ -23,15 +24,6 @@ const getAptitudeInfo = (name: string, value: number) => {
       </dd>
     </div>
   );
-};
-
-const aptitudesNames = {
-  dynamismEnergy: "Dinamismo y Energía",
-  adaptabilityToChange: "Adaptabilidad",
-  initiative: "Iniciativa y Aprendizaje Permanente",
-  personalEffectiveness: "Efectividad Personal",
-  safeConduct: "Conducta Segura y Autocuidado",
-  workingUnderPressure: "Trabajo Bajo Presión",
 };
 
 const WorkerAptitudes = ({ worker }: Props) => {

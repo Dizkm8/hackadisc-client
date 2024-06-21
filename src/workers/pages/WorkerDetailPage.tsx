@@ -9,6 +9,7 @@ import { GetWorkerDetailDto } from "../../api/dtos/get-worker-detail-dto";
 import { workerDetailDtoToWorkerDetail } from "../utils/mappers";
 import { WorkerDetail } from "../models/worker-detail";
 import LoadingSpinner from "../../common/components/LoadingSpinner";
+import WorkerAptitudesRadar from "../components/detail/WorkerAptitudesRadar";
 
 const WorkerDetailPage = () => {
   const [loadingData, setLoadingData] = useState(true);
@@ -51,6 +52,7 @@ const WorkerDetailPage = () => {
         <>
           <WorkerInfo worker={workerInfo} className="my-10" />{" "}
           <WorkerAptitudes worker={workerInfo} />
+          <WorkerAptitudesRadar worker={workerInfo} />
         </>
       )}
     </MainLayout>

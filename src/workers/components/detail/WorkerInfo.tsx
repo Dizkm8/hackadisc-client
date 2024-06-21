@@ -1,7 +1,8 @@
-import { UserWorker } from "../../models/user-worker";
+import { getSpanStatusColor } from "../../../common/utils/get-status-color";
+import { WorkerDetail } from "../../models/worker-detail";
 
 interface Props {
-  worker: UserWorker;
+  worker: WorkerDetail;
   className?: string;
 }
 
@@ -10,49 +11,48 @@ const WorkerInfo = ({ worker, className }: Props) => {
 
   return (
     <div className="w-full h-full">
-      <div className="w-min-max h-max flex flex-col-reverse md:flex-row justify-center items-center gap-0 md:gap-5">
-        <section
-          className={`flex flex-col p-4 w-full md:w-3/12 gap-4 md:shadow-xl rounded-2xl md:rounded-lg border-4 border-x-0 md:border-0  ${className}`}
+      <section className="w-min-max h-max flex flex-col-reverse md:flex-row justify-center items-center gap-0 md:gap-3">
+        <div
+          className={`flex flex-col p-4 w-full  md:w-4/12 md:shadow-xl rounded-2xl md:rounded-lg border-4 border-x-0 md:border-0  ${className}`}
         >
-          <h1 className="text-4xl mb-2 md:mb-1 font-semibold leading-none uppercase text-gray-900 dark:text-white">
+          <h1 className="text-4xl font-semibold leading-none uppercase text-gray-900 dark:text-white">
             {name}
           </h1>
-          <span className="font-medium px-3 py-1 rounded bg-pignusBlue-200 text-pignusBlue-800 dark:bg-pignusBlue-900 dark:text-pignusBlue-300">
-            {position}
-          </span>
-          <div>
-            <p className="text-gray-700 dark:text-gray-300">
-              <span className="font-semibold">Correo: </span>
-              <a
-                href={`mailto:${email}`}
-                className="text-pignusBlue-300 underline"
-              >
-                {email}
-              </a>
+          <p className="text-blue-800">{email}</p>
+          <div className="mt-3">
+            <p className="text-gray-700">
+              <span className="font-semibold">Cargo: </span>
+              {position}
             </p>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700">
               <span className="font-semibold">RUT: </span>
               {rut}
             </p>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700">
               <span className="font-semibold">Empresa: </span>
               {enterprise}
             </p>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700 my-1">
               <span className="font-semibold">Estado: </span>
-              {status}
+              <span
+                className={`px-2 py-0.5 rounded text-nowrap ${getSpanStatusColor(
+                  status
+                )}`}
+              >
+                {status}
+              </span>
             </p>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700">
               <span className="font-semibold">Área: </span>
               {area}
             </p>
           </div>
-        </section>
+        </div>
         <img
           className="w-60 h-60 rounded-full mt-5 md:mt-0 md:ml-10"
           src="https://media.licdn.com/dms/image/D4E35AQEu4OzdezYJNA/profile-framedphoto-shrink_400_400/0/1718143845563?e=1719450000&v=beta&t=KQF-xwuJcNXki7xjb-za-gy6DNmOhxJU1D8dK6nNv9E"
         />
-      </div>
+      </section>
     </div>
   );
 };

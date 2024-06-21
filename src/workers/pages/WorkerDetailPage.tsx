@@ -2,64 +2,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../../common/layout/MainLayout";
 import WorkerInfo from "../components/detail/WorkerInfo";
 import WorkerAptitudes from "../components/detail/WorkerAptitudes";
-import { UserWorker } from "../models/user-worker";
 import { notFoundPath } from "../../common/router/routes-paths";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import agent from "../../api/agent";
 import { GetWorkerDetailDto } from "../../api/dtos/get-worker-detail-dto";
 import { workerDetailDtoToWorkerDetail } from "../utils/mappers";
-
-const getWorkerInfo = (rut: string): UserWorker => {
-  return {
-    name: "Jorge Rivera Mancilla",
-    rut: "20.416.123-4",
-    email: "jorge.rivera@pignus.cl",
-    enterprise: "Pignus",
-    qualification: "C",
-    status: "En Intervención",
-    position: "Maestro de Commits",
-    area: "Proyectos",
-  };
-};
-
-const getAptitudes = () => {
-  const aptitudes = [
-    {
-      id: "kdsjafkas",
-      name: "Adaptabilidad",
-      value: 50,
-    },
-    {
-      id: "908uoijlkmsa",
-      name: "Conducta Segura y Autocuidado",
-      value: 10,
-    },
-    {
-      id: "t67ghuj",
-      name: "Dinamismo y Energía",
-      value: 80,
-    },
-    {
-      id: "12ewqd",
-      name: "Efectividad Personal",
-      value: 100,
-    },
-    {
-      id: "0i9joansc",
-      name: "Iniciativa y Aprendizaje Permanente",
-      value: 35,
-    },
-    {
-      id: "12ewdfcsxlkn",
-      name: "Trabajo Bajo Presión",
-      value: 48.5,
-    },
-  ];
-
-  return aptitudes;
-};
+import { WorkerDetail } from "../models/worker-detail";
 
 const WorkerDetailPage = () => {
+  const [workerInfo, setWorkerInfo] = useState<WorkerDetail | undefined>(
+    undefined
+  );
   const { rut } = useParams<{ rut: string }>();
   const navigate = useNavigate();
 
@@ -72,20 +25,21 @@ const WorkerDetailPage = () => {
     agent.UsersWorkers.detail(rut)
       .then((response: GetWorkerDetailDto) => {
         const mappedDetails = workerDetailDtoToWorkerDetail(response);
-        console.log(mappedDetails);
+        setWorkerInfo(mappedDetails);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  const workerInfo = getWorkerInfo(rut);
-  const aptitudes = getAptitudes();
-
   return (
     <MainLayout>
-      <WorkerInfo worker={workerInfo} className="my-10" />
-      <WorkerAptitudes aptitudes={aptitudes} />
+      {workerInfo && (
+        <>
+          <WorkerInfo worker={workerInfo} className="my-10" />{" "}
+          <WorkerAptitudes worker={workerInfo} />
+        </>
+      )}
     </MainLayout>
   );
 };

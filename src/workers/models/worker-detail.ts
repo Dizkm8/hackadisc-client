@@ -16,10 +16,10 @@ export interface WorkerInterventionContainer {
 export interface WorkerDetail {
   id: number;
   rut: string;
-  username: string;
+  name: string;
   email: string;
   area: string;
-  company: string;
+  enterprise: string;
   position: string;
   status: string;
 

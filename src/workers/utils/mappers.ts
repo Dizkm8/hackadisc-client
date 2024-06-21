@@ -29,10 +29,10 @@ export const workerDetailDtoToWorkerDetail = (
   return {
     id: dto.id,
     rut: dto.rut,
-    username: dto.user_name,
+    name: dto.user_name,
     email: dto.email,
     area: dto.area_name,
-    company: dto.company_name,
+    enterprise: dto.company_name,
     position: dto.post_name,
     status: dto.state_name,
     dynamismEnergy: dto.dynamism_energy,

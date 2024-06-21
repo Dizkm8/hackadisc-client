@@ -1,6 +1,6 @@
 import HeaderWorkersTable from "./HeaderWorkersTable";
 import BodyWorkersTable from "./BodyWorkersTable";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import agent from "../../api/agent";
 import { GetUserWorkerInfoDto } from "../../api/dtos/get-user-worker-info-dto";
 import {
@@ -17,6 +17,7 @@ import ActionButtons from "./ActionButtons";
 import TablePagination from "./TablePagination";
 import { ActivityInformation } from "../models/activity-information";
 import { AptitudeNameType } from "../models/aptitude-name-type";
+import SearchIcon from "../../common/components/SearchIcon";
 
 const columns = [
   {
@@ -68,12 +69,14 @@ const WorkersTable = () => {
     ActivityInformation | undefined
   >(undefined);
   const { workerRuts, setWorkerRuts } = useStorage();
+  const workersRef = useRef<UserWorker[]>([]);
 
   useEffect(() => {
     agent.UsersWorkers.list()
       .then((response: GetUserWorkerInfoDto) => {
         const { results } = response;
         setWorkersData(manyUserWorkerDtoToModel(results));
+        workersRef.current = manyUserWorkerDtoToModel(results);
       })
       .catch((error) => {
         console.error(error);
@@ -109,6 +112,7 @@ const WorkersTable = () => {
       .then((response: UserWorkerCapacitationDto[]) => {
         const mappedWorkers = manyUserWorkerCapacitationDtoToModel(response);
         setWorkersData(mappedWorkers);
+        workersRef.current = manyUserWorkerCapacitationDtoToModel(response);
 
         const selectedWorkersRuts = mappedWorkers
           .filter((worker) => worker.isChecked)
@@ -141,6 +145,7 @@ const WorkersTable = () => {
       .then((response: GetUserWorkerInfoDto) => {
         const { results } = response;
         setWorkersData(manyUserWorkerDtoToModel(results));
+        workersRef.current = manyUserWorkerDtoToModel(results);
       })
       .catch((error) => {
         console.error(error);
@@ -161,30 +166,40 @@ const WorkersTable = () => {
           <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
             <div className="w-full md:w-1/2">
               <form className="flex items-center">
-                <label htmlFor="simple-search" className="sr-only">
-                  Search
+                <label htmlFor="worker-search" className="sr-only">
+                  Buscador
                 </label>
                 <div className="relative w-full">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg
-                      aria-hidden="true"
-                      className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      />
-                    </svg>
+                    <SearchIcon />
                   </div>
                   <input
-                    type="text"
-                    id="simple-search"
+                    id="worker-search"
+                    onChange={(e) => {
+                      const searchValue = e.target.value.toLowerCase();
+                      setWorkersData(
+                        workersRef.current.filter((worker) => {
+                          return (
+                            worker.name.toLowerCase().includes(searchValue) ||
+                            worker.rut.toLowerCase().includes(searchValue) ||
+                            worker.email.toLowerCase().includes(searchValue) ||
+                            worker.enterprise
+                              .toLowerCase()
+                              .includes(searchValue) ||
+                            worker.qualification
+                              ?.toLowerCase()
+                              .includes(searchValue) ||
+                            worker.status.toLowerCase().includes(searchValue) ||
+                            worker.position
+                              .toLowerCase()
+                              .includes(searchValue) ||
+                            worker.area.toLowerCase().includes(searchValue)
+                          );
+                        })
+                      );
+                    }}
                     placeholder={searchInputPlaceholder}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pignus-500 focus:border-pignus-500 block w-full pl-10 p-2"
                   />
                 </div>
               </form>

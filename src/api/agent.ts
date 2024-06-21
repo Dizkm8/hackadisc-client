@@ -46,6 +46,11 @@ const UsersWorkers = {
 const Activities = {
   list: () => requests.get("api/interventions/?limit=100"),
   findOne: (id: number) => requests.get(`api/interventions/${id}/`),
+  complete: (activityId: number, files: File[]) => {
+    const formData = new FormData();
+    files.forEach((file) => formData.append("documents", file));
+    return requests.post(`api/interventions/${activityId}/complete/`, formData);
+  },
 };
 
 const agent = { Auth, UsersWorkers, Activities };

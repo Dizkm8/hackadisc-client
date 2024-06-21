@@ -17,9 +17,11 @@ export const mapSimpleActivityDtoToActivity = (
 };
 
 export const mapDetailActivityDtoToModel = (
+  id: number,
   dto: GetActivityDetailDto
 ): ActivityDetail => {
   return {
+    id,
     name: dto.name,
     description: dto.description,
     date: new Date(dto.date),

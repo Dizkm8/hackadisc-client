@@ -6,6 +6,7 @@ export interface RelatedActivityDetailUsers {
 }
 
 export interface ActivityDetail {
+  id: number;
   name: string;
   description: string;
   date: Date;

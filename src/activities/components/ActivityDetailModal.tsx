@@ -1,3 +1,4 @@
+import CButton from "../../common/components/CButton";
 import CloseModalButton from "../../common/components/CloseModalButton";
 import {
   getAptitudeESNameById,
@@ -6,6 +7,12 @@ import {
 import { ActivityDetail } from "../models/activity-detail";
 import { FaUserAltSlash } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
+import DropzoneInput from "./DropzoneInput";
+import { useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegFilePdf } from "react-icons/fa";
+import agent from "../../api/agent";
 
 const getDateText = (date: Date): string => {
   const daysOfWeek = [
@@ -32,9 +39,11 @@ const getDateText = (date: Date): string => {
   return finalFormattedDate;
 };
 
-const titlesTexts = {
+const formTexts = {
   description: "Descripción",
   participants: "Invitados",
+  endActivity: "Añadir Documentos de Cierre",
+  sendButton: "Finalizar",
 };
 
 interface Props {
@@ -43,6 +52,8 @@ interface Props {
 }
 
 const ActivityDetailModal = ({ activity, onClose }: Props) => {
+  const [files, setFiles] = useState<File[]>([]);
+
   const getParticipants = () => {
     if (activity.participants.length === 0)
       return (
@@ -72,6 +83,32 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
 
   const handleClose = () => {
     onClose();
+    setFiles([]);
+  };
+
+  const handleAddFiles = (newFiles: File[]) => {
+    const [firstFile] = newFiles;
+    if (!firstFile) return;
+
+    const alreadyExists = files.some((file) => file.name === firstFile.name);
+    if (alreadyExists) return;
+
+    setFiles((prevState) => [...prevState, ...Array.from(newFiles)]);
+  };
+
+  const onFileDelete = (filename: string) => {
+    setFiles((prevState) => prevState.filter((file) => file.name !== filename));
+  };
+
+  const completeActivity = () => {
+    console.log(files);
+    agent.Activities.complete(activity.id, files)
+      .then(() => {
+        handleClose();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -102,10 +139,45 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
             </span>
           </p>
           <p>{getDateText(activity.date)}</p>
-          <p className="font-semibold mt-3">{titlesTexts.description}</p>
+          <p className="font-semibold mt-3">{formTexts.description}</p>
           <p>{activity.description}</p>
-          <p className="font-semibold mt-5">{titlesTexts.participants}</p>
-          <div className="h-[300px] overflow-y-scroll">{getParticipants()}</div>
+          <p className="font-semibold mt-5">{formTexts.participants}</p>
+          <div className="h-[250px] overflow-y-scroll">{getParticipants()}</div>
+          <hr className="my-3 border" />
+          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            {formTexts.endActivity}
+          </h3>
+          {files && (
+            <div className="flex gap-3 flex-col">
+              {files.map(({ name }) => (
+                <div
+                  key={name}
+                  className="flex gap-3 items-center p-1 bg-gray-200 rounded-lg"
+                >
+                  <FaRegFilePdf className="w-4 h-4 ml-3" />
+                  <p className="mr-">{name}</p>
+                  <button
+                    className="rounded-full p-1"
+                    onClick={() => onFileDelete(name)}
+                  >
+                    <FaRegTrashAlt className="w-5 h-5 fill-red-500 hover:fill-red-600" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <DropzoneInput
+            className="p-10 mt-3 mb-5"
+            handleAddFiles={handleAddFiles}
+          />
+          <CButton
+            colorType="blue"
+            className="w-full py-1"
+            onClick={completeActivity}
+          >
+            <IoMdAdd className="mr-2 h-5 w-5" />
+            {formTexts.sendButton}
+          </CButton>
         </div>
       </div>
     </div>

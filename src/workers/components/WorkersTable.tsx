@@ -112,6 +112,7 @@ const WorkersTable = () => {
 
   const onActivitySet = (aptitude: AptitudeNameType) => {
     const aptitudeId = getAptitudeIdByName(aptitude);
+    setDataLoading(true);
     agent.UsersWorkers.listByAptitude(aptitudeId)
       .then((response: UserWorkerCapacitationDto[]) => {
         const mappedWorkers = manyUserWorkerCapacitationDtoToModel(response);
@@ -124,6 +125,9 @@ const WorkersTable = () => {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setDataLoading(false);
       });
   };
 

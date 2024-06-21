@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Navbar as FlowbiteNavbar } from "flowbite-react";
 import { activitiesPath, homePath, loginPath } from "../router/routes-paths";
-import useTokenRemove from "../../auth/hooks/useTokenRemove";
 import { useNavigate } from "react-router-dom";
+import useLogout from "../../auth/hooks/useLogout";
 
 const userSettingsOpts = ["Mi perfil"];
 const signOutText = "Cerrar Sesión";
@@ -29,11 +29,11 @@ const notActivePathClassName =
   "bg-white md:bg-transparent text-white hover:!text-pignus-600";
 
 const Navbar = () => {
-  const { removeToken } = useTokenRemove();
+  const { logout } = useLogout();
   const navigate = useNavigate();
 
-  const logout = () => {
-    removeToken();
+  const handleLogout = () => {
+    logout();
     navigate(loginPath);
   };
 
@@ -65,7 +65,7 @@ const Navbar = () => {
             <Dropdown.Item key={page}>{page}</Dropdown.Item>
           ))}
           <Dropdown.Divider />
-          <Dropdown.Item onClick={logout}>{signOutText}</Dropdown.Item>
+          <Dropdown.Item onClick={handleLogout}>{signOutText}</Dropdown.Item>
         </Dropdown>
         <FlowbiteNavbar.Toggle />
       </div>

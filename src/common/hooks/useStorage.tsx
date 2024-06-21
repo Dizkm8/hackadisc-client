@@ -4,6 +4,8 @@ import { persist } from "zustand/middleware";
 interface StorageState {
   token?: string;
   setToken: (newToken: string) => void;
+  role: number;
+  setRole: (newRole: number) => void;
   workerRuts: string[];
   setWorkerRuts: (newWorkerRuts: string[]) => void;
   addWorkerRut: (rut: string) => void;
@@ -12,6 +14,7 @@ interface StorageState {
 
 const defaultState = {
   token: undefined,
+  role: -1,
   workerRuts: [],
 };
 
@@ -20,6 +23,7 @@ const useStorage = create<StorageState>()(
     (set) => ({
       ...defaultState,
       setToken: (newToken) => set({ token: newToken }),
+      setRole: (newRole) => set({ role: newRole }),
       setWorkerRuts: (newWorkerRuts) => set({ workerRuts: newWorkerRuts }),
       addWorkerRut: (rut) =>
         set((state) => ({ workerRuts: [...state.workerRuts, rut] })),
@@ -30,7 +34,7 @@ const useStorage = create<StorageState>()(
     }),
     {
       name: "rehaviour-storage",
-      partialize: (state) => ({ token: state.token }),
+      partialize: (state) => ({ token: state.token, role: state.role }),
     }
   )
 );

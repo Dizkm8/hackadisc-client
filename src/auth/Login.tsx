@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { homePath } from "../common/router/routes-paths";
 import agent from "../api/agent";
 import { useState } from "react";
-import useTokenStore from "./hooks/useTokenStore";
 import { HiInformationCircle } from "react-icons/hi";
 import CSpinner from "../common/components/CSpinner";
+import useLogin from "./hooks/useLogin";
 
 type LoginInputs = {
   rutInput: string;
@@ -28,7 +28,7 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginInputs>();
   const navigate = useNavigate();
-  const { setToken } = useTokenStore();
+  const { setToken } = useLogin();
 
   const disableInput = () => {
     setLoading(true);

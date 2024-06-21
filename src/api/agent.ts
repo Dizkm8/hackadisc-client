@@ -40,6 +40,7 @@ const UsersWorkers = {
     requests.post(`api/create_intervention/`, {
       ...mapAssignUsersToActivity(activityInfo, workersRuts),
     }),
+  detail: (rut: string) => requests.get(`api/workers/${rut}/`),
 };
 
 const Activities = {

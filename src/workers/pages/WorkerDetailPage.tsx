@@ -3,6 +3,11 @@ import MainLayout from "../../common/layout/MainLayout";
 import WorkerInfo from "../components/detail/WorkerInfo";
 import WorkerAptitudes from "../components/detail/WorkerAptitudes";
 import { UserWorker } from "../models/user-worker";
+import { notFoundPath } from "../../common/router/routes-paths";
+import { useEffect } from "react";
+import agent from "../../api/agent";
+import { GetWorkerDetailDto } from "../../api/dtos/get-worker-detail-dto";
+import { workerDetailDtoToWorkerDetail } from "../utils/mappers";
 
 const getWorkerInfo = (rut: string): UserWorker => {
   return {
@@ -59,9 +64,20 @@ const WorkerDetailPage = () => {
   const navigate = useNavigate();
 
   if (!rut) {
-    navigate("/no-encontrado"); // TODO: Assign path from dedicated paths file
+    navigate(notFoundPath);
     return;
   }
+
+  useEffect(() => {
+    agent.UsersWorkers.detail(rut)
+      .then((response: GetWorkerDetailDto) => {
+        const mappedDetails = workerDetailDtoToWorkerDetail(response);
+        console.log(mappedDetails);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const workerInfo = getWorkerInfo(rut);
   const aptitudes = getAptitudes();

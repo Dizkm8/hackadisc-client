@@ -6,6 +6,7 @@ import {
   activitiesPath,
   homePath,
   loginPath,
+  notFoundPath,
   workerDetailPath,
 } from "./routes-paths";
 import WorkerDetailPage from "../../workers/pages/WorkerDetailPage";
@@ -33,6 +34,10 @@ const Router = createBrowserRouter([
       {
         path: activitiesPath,
         element: <ActivitiesPage />,
+      },
+      {
+        path: notFoundPath,
+        element: <NotFoundPage />,
       },
     ],
   },

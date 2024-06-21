@@ -12,6 +12,8 @@ import {
 import WorkerDetailPage from "../../workers/pages/WorkerDetailPage";
 import ActivitiesPage from "../../activities/pages/Page";
 import NotFoundPage from "../pages/NotFoundPage";
+import RequireAuth from "./RequireAuth";
+import { SHIFT_MANAGER } from "../../api/constants/roles";
 
 const Router = createBrowserRouter([
   {
@@ -24,16 +26,21 @@ const Router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: homePath,
-        element: <HomePage />,
-      },
-      {
-        path: workerDetailPath,
-        element: <WorkerDetailPage />,
-      },
-      {
-        path: activitiesPath,
-        element: <ActivitiesPage />,
+        element: <RequireAuth roles={[SHIFT_MANAGER]} />,
+        children: [
+          {
+            path: homePath,
+            element: <HomePage />,
+          },
+          {
+            path: workerDetailPath,
+            element: <WorkerDetailPage />,
+          },
+          {
+            path: activitiesPath,
+            element: <ActivitiesPage />,
+          },
+        ],
       },
       {
         path: notFoundPath,

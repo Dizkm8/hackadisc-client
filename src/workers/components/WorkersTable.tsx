@@ -113,6 +113,7 @@ const WorkersTable = () => {
   const onActivitySet = (aptitude: AptitudeNameType) => {
     const aptitudeId = getAptitudeIdByName(aptitude);
     setDataLoading(true);
+
     agent.UsersWorkers.listByAptitude(aptitudeId)
       .then((response: UserWorkerCapacitationDto[]) => {
         const mappedWorkers = manyUserWorkerCapacitationDtoToModel(response);
@@ -132,7 +133,16 @@ const WorkersTable = () => {
   };
 
   const assignActivityAndUsers = () => {
-    console.log(workerRuts);
+    const actInfo = activityInfo as ActivityInformation;
+    const { aptitude } = actInfo;
+    const aptitudeId = getAptitudeIdByName(aptitude);
+    agent.UsersWorkers.assignUsersToActivity(aptitudeId, actInfo, workerRuts)
+      .then(() => {
+        console.log("Activity assigned successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   if (dataLoading) {

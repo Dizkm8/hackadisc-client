@@ -31,6 +31,15 @@ const UsersWorkers = {
   list: () => requests.get("api/workers/"),
   listByAptitude: (aptitudeId: number) =>
     requests.get(`api/workers/competence/${aptitudeId}/`),
+  assignUsersToActivity: (
+    activityId: number,
+    activityInfo: any,
+    workersRuts: string[]
+  ) =>
+    requests.post(`api/workers/assign/${activityId}/`, {
+      ...activityInfo,
+      workers_ruts: workersRuts,
+    }),
 };
 
 const agent = { Auth, UsersWorkers };

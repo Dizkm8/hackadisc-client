@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, Navbar as FlowbiteNavbar } from "flowbite-react";
-import { homePath, loginPath } from "../router/routes-paths";
+import { activitiesPath, homePath, loginPath } from "../router/routes-paths";
 import useTokenRemove from "../../auth/hooks/useTokenRemove";
 import { useNavigate } from "react-router-dom";
 
@@ -12,20 +12,8 @@ const pages = [
     href: homePath,
   },
   {
-    name: "Sobre Nosotros",
-    href: "/sobre-nosotros",
-  },
-  {
-    name: "Servicios",
-    href: "/servicios",
-  },
-  {
-    name: "Precios",
-    href: "/precios",
-  },
-  {
-    name: "Contacto",
-    href: "/contacto",
+    name: "Actividades",
+    href: activitiesPath,
   },
 ];
 const userInformation = {

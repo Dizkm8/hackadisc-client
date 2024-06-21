@@ -9,7 +9,7 @@ export interface GetActivityDetailDto {
   name: string;
   description: string;
   date: Date;
-  category: string;
-  competence: string;
+  category: number;
+  competence: number;
   participants: RelatedActivityUsersDto[];
 }

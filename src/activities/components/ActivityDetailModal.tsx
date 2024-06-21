@@ -1,4 +1,8 @@
 import CloseModalButton from "../../common/components/CloseModalButton";
+import {
+  getAptitudeESNameById,
+  getCategoryESNameById,
+} from "../../workers/utils/utils";
 import { ActivityDetail } from "../models/activity-detail";
 import { FaUserAltSlash } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
@@ -91,10 +95,10 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
           </h3>
           <p>
             <span className="text-xs font-medium px-2 py-0.5 rounded text-nowrap bg-pignus-200 text-pignus-800 mr-3">
-              {activity.aptitude}
+              {getAptitudeESNameById(activity.aptitude)}
             </span>
             <span className="text-xs font-medium px-2 py-0.5 rounded text-nowrap bg-pignusBlue-200 text-pignusBlue-800">
-              {activity.category}
+              {getCategoryESNameById(activity.category)}
             </span>
           </p>
           <p>{getDateText(activity.date)}</p>

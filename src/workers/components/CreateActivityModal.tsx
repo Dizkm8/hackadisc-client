@@ -5,6 +5,10 @@ import CDatePicker from "../../common/components/CDatePicker";
 import CloseModalButton from "../../common/components/CloseModalButton";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../../common/components/CTextInput";
+import { categoriesNames } from "../types/categories-constants";
+import { aptitudesNames } from "../types/aptitudes-constants";
+import { CategoryNameType } from "../../common/types/category-name-type";
+import { AptitudeNameType } from "../../common/types/aptitude-name-type";
 
 const addActivityText = "Nueva Actividad";
 const categoryInputName = "Categoria";
@@ -22,7 +26,19 @@ const descriptionInput = {
     "Ej: Curso donde se enseñan las medidas de seguridad en el trabajo",
 };
 
-const categoryOptions = [
+interface CategoryItem {
+  id: number;
+  value: CategoryNameType | "SELECT_CATEGORY";
+  name: string;
+}
+
+interface AptitudeItem {
+  id: number;
+  value: AptitudeNameType | "SELECT_CATEGORY";
+  name: string;
+}
+
+const categoryOptions: CategoryItem[] = [
   {
     id: -1,
     value: "SELECT_CATEGORY",
@@ -31,21 +47,21 @@ const categoryOptions = [
   {
     id: 1,
     value: "COURSE",
-    name: "Curso",
+    name: categoriesNames.course,
   },
   {
     id: 2,
     value: "TRAINING",
-    name: "Capacitación",
+    name: categoriesNames.training,
   },
   {
     id: 3,
     value: "SPEECH",
-    name: "Charla",
+    name: categoriesNames.speech,
   },
 ];
 
-const aptitudesOptions = [
+const aptitudesOptions: AptitudeItem[] = [
   {
     id: -1,
     value: "SELECT_CATEGORY",
@@ -54,32 +70,32 @@ const aptitudesOptions = [
   {
     id: 1,
     value: "ADAPTABILITY",
-    name: "Adaptabilidad",
+    name: aptitudesNames.adaptabilityToChange,
   },
   {
     id: 2,
     value: "CONDUCT",
-    name: "Conducta Segura y Autocuidado",
+    name: aptitudesNames.safeConduct,
   },
   {
     id: 3,
     value: "DYNAMISM",
-    name: "Dinamismo y Energía",
+    name: aptitudesNames.dynamismEnergy,
   },
   {
     id: 4,
     value: "EFFECTIVENESS",
-    name: "Efectividad Personal",
+    name: aptitudesNames.personalEffectiveness,
   },
   {
     id: 5,
     value: "INITIATIVE",
-    name: "Iniciativa y Aprendizaje Permanente",
+    name: aptitudesNames.initiative,
   },
   {
     id: 6,
     value: "PRESSURE",
-    name: "Trabajo Bajo Presión",
+    name: aptitudesNames.workingUnderPressure,
   },
 ];
 

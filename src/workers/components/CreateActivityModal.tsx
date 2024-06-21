@@ -3,7 +3,7 @@ import { Label } from "flowbite-react";
 import ScheduleIcon from "../../common/components/ScheduleIcon";
 import CDatePicker from "../../common/components/CDatePicker";
 import CloseModalButton from "../../common/components/CloseModalButton";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import CTextInput from "../../common/components/CTextInput";
 
 const addActivityText = "Nueva Actividad";
@@ -99,6 +99,7 @@ type AddActivityInputs = {
   category: string;
   aptitudes: string;
   description: string;
+  date: string;
 };
 
 const getErrorMessage = (error: string) => {
@@ -106,17 +107,19 @@ const getErrorMessage = (error: string) => {
 };
 
 interface Props {
-  onClose: () => void;
+  onClose: (data?: any) => void;
 }
 
 const CreateActivityModal = ({ onClose }: Props) => {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AddActivityInputs>();
-  const onSubmit: SubmitHandler<AddActivityInputs> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<AddActivityInputs> = (data) => {
+    onClose(data);
+  };
 
   const onDiscard = () => {
     onClose();
@@ -243,7 +246,13 @@ const CreateActivityModal = ({ onClose }: Props) => {
                 >
                   {dateInputName}
                 </Label>
-                <CDatePicker ariaLabel="activity-date-picker" />
+                <Controller
+                  control={control}
+                  name="date"
+                  render={({ field }) => (
+                    <CDatePicker ariaLabel="activity-date-picker" field={field} />
+                  )}
+                />
               </div>
 
               <div className="sm:col-span-2">

@@ -1,10 +1,6 @@
 import { Datepicker, Flowbite } from "flowbite-react";
 import type { CustomFlowbiteTheme } from "flowbite-react";
 
-interface Props {
-  ariaLabel: string;
-}
-
 const customTheme: CustomFlowbiteTheme = {
   textInput: {
     base: "flex",
@@ -145,7 +141,12 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-const CDatePicker = ({ ariaLabel }: Props) => {
+interface Props {
+  field: any;
+  ariaLabel: string;
+}
+
+const CDatePicker = ({ field, ariaLabel }: Props) => {
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <Datepicker
@@ -154,6 +155,9 @@ const CDatePicker = ({ ariaLabel }: Props) => {
         aria-label={ariaLabel}
         labelTodayButton="Asignar Hoy"
         showClearButton={false}
+        onSelectedDateChanged={(date) => {
+          field.onChange(date.toJSON());
+        }}
       />
     </Flowbite>
   );

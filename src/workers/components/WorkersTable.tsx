@@ -75,8 +75,9 @@ const WorkersTable = () => {
     setShowAddActivityModal(true);
   };
 
-  const onCloseAddActivityModal = () => {
+  const onCloseAddActivityModal = (data?: any) => {
     setShowAddActivityModal(false);
+    console.log(data);
   };
 
   return (

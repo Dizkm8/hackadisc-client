@@ -8,8 +8,10 @@ import agent from "../../api/agent";
 import { GetWorkerDetailDto } from "../../api/dtos/get-worker-detail-dto";
 import { workerDetailDtoToWorkerDetail } from "../utils/mappers";
 import { WorkerDetail } from "../models/worker-detail";
+import LoadingSpinner from "../../common/components/LoadingSpinner";
 
 const WorkerDetailPage = () => {
+  const [loadingData, setLoadingData] = useState(true);
   const [workerInfo, setWorkerInfo] = useState<WorkerDetail | undefined>(
     undefined
   );
@@ -29,8 +31,19 @@ const WorkerDetailPage = () => {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoadingData(false);
       });
   }, []);
+
+  if (loadingData) {
+    return (
+      <MainLayout>
+        <LoadingSpinner />
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>

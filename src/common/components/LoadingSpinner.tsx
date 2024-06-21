@@ -1,6 +1,6 @@
 const LoadingSpinner = () => {
   return (
-    <div className="flex justify-center w-full h-dvh items-center pb-[150px] md:pb-[300px]">
+    <div className="flex justify-center w-full h-[90dvh] items-center pb-[150px] md:pb-[20px]">
       <div role="status">
         <svg
           aria-hidden="true"

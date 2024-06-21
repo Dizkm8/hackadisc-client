@@ -9,6 +9,6 @@ export const mapSimpleActivityDtoToActivity = (
     end: new Date(simpleActivityDto.date),
     className: "!bg-pignus-500 hover:!bg-pignus-600",
   };
-  mappedActivity.end.setHours(mappedActivity.end.getHours() + 2);
+  mappedActivity.end.setHours(mappedActivity.end.getHours() + 1);
   return mappedActivity;
 };

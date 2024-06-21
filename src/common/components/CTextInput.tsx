@@ -7,7 +7,7 @@ type Props = {
   color: "normal" | "failure";
   errorText?: string;
   className?: string;
-  registerFunc: any;
+  registerFunc?: any;
 };
 
 const CTextInput = React.forwardRef<HTMLInputElement, Props>(

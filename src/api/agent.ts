@@ -44,6 +44,7 @@ const UsersWorkers = {
 
 const Activities = {
   list: () => requests.get("api/interventions/?limit=100"),
+  findOne: (id: number) => requests.get(`api/intervention/${id}/`),
 };
 
 const agent = { Auth, UsersWorkers, Activities };

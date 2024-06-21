@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { AuthDto } from "./dtos/auth-dto";
+import { ActivityInformation } from "../workers/models/activity-information";
+import { mapAssignUsersToActivity } from "./utils/mapper";
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.withCredentials = true;
@@ -32,13 +34,11 @@ const UsersWorkers = {
   listByAptitude: (aptitudeId: number) =>
     requests.get(`api/workers/competence/${aptitudeId}/`),
   assignUsersToActivity: (
-    activityId: number,
-    activityInfo: any,
+    activityInfo: ActivityInformation,
     workersRuts: string[]
   ) =>
-    requests.post(`api/workers/assign/${activityId}/`, {
-      ...activityInfo,
-      workers_ruts: workersRuts,
+    requests.post(`api/create_intervention/`, {
+      ...mapAssignUsersToActivity(activityInfo, workersRuts),
     }),
 };
 

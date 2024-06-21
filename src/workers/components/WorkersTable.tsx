@@ -9,12 +9,14 @@ import {
 } from "../../common/services/dto-to-model";
 import { UserWorker } from "../models/user-worker";
 import CreateActivityModal from "./CreateActivityModal";
-import { AptitudeNameType, getAptitudeIdByName } from "../utils/utils";
+import { getAptitudeIdByName } from "../utils/utils";
 import { UserWorkerCapacitationDto } from "../../api/dtos/user-worker-capacitation-dto";
 import useStorage from "../../common/hooks/useStorage";
 import LoadingSpinner from "../../common/components/LoadingSpinner";
 import ActionButtons from "./ActionButtons";
 import TablePagination from "./TablePagination";
+import { ActivityInformation } from "../models/activity-information";
+import { AptitudeNameType } from "../models/aptitude-name-type";
 
 const columns = [
   {
@@ -56,14 +58,6 @@ const columns = [
 ];
 
 const searchInputPlaceholder = "Buscar trabajador...";
-
-interface ActivityInformation {
-  activity: string;
-  aptitude: AptitudeNameType;
-  category: string;
-  date: Date;
-  description: string;
-}
 
 const WorkersTable = () => {
   const [dataLoading, setDataLoading] = useState(true);
@@ -131,14 +125,28 @@ const WorkersTable = () => {
 
   const assignActivityAndUsers = () => {
     const actInfo = activityInfo as ActivityInformation;
-    const { aptitude } = actInfo;
-    const aptitudeId = getAptitudeIdByName(aptitude);
-    agent.UsersWorkers.assignUsersToActivity(aptitudeId, actInfo, workerRuts)
+    agent.UsersWorkers.assignUsersToActivity(actInfo, workerRuts)
       .then(() => {
         console.log("Activity assigned successfully");
       })
       .catch((error) => {
         console.error(error);
+      });
+  };
+
+  const cancelActivity = () => {
+    setDataLoading(true);
+    setActivityInfo(undefined);
+    agent.UsersWorkers.list()
+      .then((response: GetUserWorkerInfoDto) => {
+        const { results } = response;
+        setWorkersData(manyUserWorkerDtoToModel(results));
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setDataLoading(false);
       });
   };
 
@@ -186,6 +194,7 @@ const WorkersTable = () => {
                 isActivityInfo={!!activityInfo}
                 onAddActivityButtonClick={onAddActivityButtonClick}
                 assignActivityAndUsers={assignActivityAndUsers}
+                cancelActivity={cancelActivity}
               />
             </div>
           </div>

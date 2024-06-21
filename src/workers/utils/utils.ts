@@ -1,10 +1,4 @@
-export type AptitudeNameType =
-  | "ADAPTABILITY"
-  | "CONDUCT"
-  | "DYNAMISM"
-  | "EFFECTIVENESS"
-  | "INITIATIVE"
-  | "PRESSURE";
+import { AptitudeNameType } from "../models/aptitude-name-type";
 
 export const getAptitudeIdByName = (aptitudeName: AptitudeNameType) => {
   if (aptitudeName === "ADAPTABILITY") return 1;
@@ -13,5 +7,12 @@ export const getAptitudeIdByName = (aptitudeName: AptitudeNameType) => {
   if (aptitudeName === "EFFECTIVENESS") return 4;
   if (aptitudeName === "INITIATIVE") return 5;
   if (aptitudeName === "PRESSURE") return 6;
+  return -1;
+};
+
+export const getCategoryIdByName = (categoryName: string) => {
+  if (categoryName === "COURSE") return 1;
+  if (categoryName === "TRAINING") return 2;
+  if (categoryName === "SPEECH") return 3;
   return -1;
 };

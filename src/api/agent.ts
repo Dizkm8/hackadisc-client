@@ -29,6 +29,8 @@ const Auth = {
 
 const UsersWorkers = {
   list: () => requests.get("api/workers/"),
+  listByAptitude: (aptitudeId: number) =>
+    requests.get(`api/workers/competence/${aptitudeId}/`),
 };
 
 const agent = { Auth, UsersWorkers };

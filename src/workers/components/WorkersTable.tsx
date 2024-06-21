@@ -3,12 +3,17 @@ import BodyWorkersTable from "./BodyWorkersTable";
 import { useEffect, useState } from "react";
 import agent from "../../api/agent";
 import { GetUserWorkerInfoDto } from "../../api/dtos/get-user-worker-info-dto";
-import { manyUserWorkerDtoToModel } from "../../common/services/dto-to-model";
+import {
+  manyUserWorkerCapacitationDtoToModel,
+  manyUserWorkerDtoToModel,
+} from "../../common/services/dto-to-model";
 import { UserWorker } from "../models/user-worker";
 import CButton from "../../common/components/CButton";
 import { IoMdAdd } from "react-icons/io";
 import { FaArrowUp } from "react-icons/fa6";
 import CreateActivityModal from "./CreateActivityModal";
+import { AptitudeNameType, getAptitudeIdByName } from "../utils/utils";
+import { UserWorkerCapacitationDto } from "../../api/dtos/user-worker-capacitation-dto";
 
 const columns = [
   {
@@ -55,7 +60,7 @@ const sendActivityAndUsers = "Asignar Actividad";
 
 interface ActivityInformation {
   activity: string;
-  aptitude: string;
+  aptitude: AptitudeNameType;
   category: string;
   date: Date;
   description: string;
@@ -97,8 +102,15 @@ const WorkersTable = () => {
     onActivitySet(aptitude);
   };
 
-  const onActivitySet = (aptitude: string) => {
-    console.log(aptitude);
+  const onActivitySet = (aptitude: AptitudeNameType) => {
+    const aptitudeId = getAptitudeIdByName(aptitude);
+    agent.UsersWorkers.listByAptitude(aptitudeId)
+      .then((response: UserWorkerCapacitationDto[]) => {
+        setWorkersData(manyUserWorkerCapacitationDtoToModel(response));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

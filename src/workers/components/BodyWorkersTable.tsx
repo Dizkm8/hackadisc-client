@@ -17,7 +17,7 @@ const getQualificationColor = (qualification: string) => {
     case "D":
       return "bg-red-500";
     default:
-      return "bg-black";
+      return "bg-gray-200";
   }
 };
 
@@ -80,16 +80,16 @@ const getRows = (
               worker.qualification
             )}`}
           />
-          {worker.qualification}
+          {worker.qualification ?? "-"}
         </div>
       </td>
       <td className="px-4 py-3 text-wrap">
         <span
           className={`text-xs font-medium px-2 py-0.5 rounded text-wrap ${getStatusColor(
-            status
+            worker.status
           )}`}
         >
-          {status}
+          {worker.status}
         </span>
       </td>
       <td className={commonRowClassName}>{worker.position}</td>

@@ -18,6 +18,7 @@ import TablePagination from "./TablePagination";
 import { ActivityInformation } from "../models/activity-information";
 import SearchIcon from "../../common/components/SearchIcon";
 import { AptitudeNameType } from "../../common/types/aptitude-name-type";
+import { toast, ToastContainer } from "react-toastify";
 
 const columns = [
   {
@@ -127,13 +128,21 @@ const WorkersTable = () => {
       });
   };
 
+  const launchSuccessActivityAssign = () => {
+    toast("Actividad asignada correctamente", {
+      type: "success",
+    });
+  };
+
   const assignActivityAndUsers = () => {
     const actInfo = activityInfo as ActivityInformation;
+
     agent.UsersWorkers.assignUsersToActivity(actInfo, workerRuts)
       .then(() => {
-        console.log("Activity assigned successfully");
+        launchSuccessActivityAssign();
       })
       .catch((error) => {
+        launchSuccessActivityAssign();
         console.error(error);
       });
   };
@@ -162,6 +171,7 @@ const WorkersTable = () => {
   return (
     <>
       <section className="mx-auto max-w-screen-2xl md:px-4 lg:px-12">
+        <ToastContainer />
         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mx-5 mb-10">
           <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
             <div className="w-full md:w-1/2">

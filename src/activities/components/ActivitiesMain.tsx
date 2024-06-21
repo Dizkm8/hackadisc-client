@@ -36,7 +36,6 @@ const ActivitiesMain = () => {
     agent.Activities.findOne(id)
       .then((response: GetActivityDetailDto) => {
         const mappedActivity = mapDetailActivityDtoToModel(response);
-        console.log(mappedActivity);
         setSelectedActivity(mappedActivity);
       })
       .catch((error) => console.error(error));

@@ -153,7 +153,7 @@ const CDatePicker = ({ field, ariaLabel, color = "gray" }: Props) => {
       <Datepicker
         minDate={new Date()}
         language="es-CL"
-        aria-label={ariaLabel+"-input"}
+        aria-label={ariaLabel + "-input"}
         labelTodayButton="Asignar Hoy"
         showClearButton={false}
         onSelectedDateChanged={(date) => {

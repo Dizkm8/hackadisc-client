@@ -1,7 +1,18 @@
 import { Button, ButtonProps } from "flowbite-react";
 
+const getClassNames = (colorType: "solid" | "outline" | "blue") => {
+  switch (colorType) {
+    case "solid":
+      return "text-white bg-pignus-500 border-transparent enabled:hover:bg-pignus-700 focus:ring-pignus-300";
+    case "outline":
+      return "bg-transparent text-red-700 hover:text-white border-red-500 enabled:hover:bg-red-700 focus:ring-red-300";
+    case "blue":
+      return "bg-pignusBlue-500 text-white border-transparent enabled:hover:bg-pignusBlue-700 focus:ring-pignusBlue-300";
+  }
+};
+
 type CButtonProps = ButtonProps & {
-  colorType?: "solid" | "outline";
+  colorType?: "solid" | "outline" | "blue";
   loading?: boolean;
 };
 
@@ -11,10 +22,7 @@ const CButton: React.FC<CButtonProps> = ({
   className,
   ...props
 }) => {
-  const colorClassName =
-    colorType === "solid"
-      ? "text-white bg-pignus-500 border-transparent enabled:hover:bg-pignus-700 focus:ring-pignus-300"
-      : "bg-transparent text-red-700 hover:text-white border-red-500 enabled:hover:bg-red-700 focus:ring-red-300";
+  const colorClassName = getClassNames(colorType);
 
   return (
     <Button

@@ -7,6 +7,7 @@ import { manyUserWorkerDtoToModel } from "../../common/services/dto-to-model";
 import { UserWorker } from "../models/user-worker";
 import CButton from "../../common/components/CButton";
 import { IoMdAdd } from "react-icons/io";
+import { FaArrowUp } from "react-icons/fa6";
 import CreateActivityModal from "./CreateActivityModal";
 
 const columns = [
@@ -50,11 +51,23 @@ const columns = [
 
 const searchInputPlaceholder = "Buscar trabajador...";
 const addActivityText = "Nueva Actividad";
+const sendActivityAndUsers = "Asignar Actividad";
+
+interface ActivityInformation {
+  activity: string;
+  aptitude: string;
+  category: string;
+  date: Date;
+  description: string;
+}
 
 const WorkersTable = () => {
   const [workersData, setWorkersData] = useState<UserWorker[]>([]);
   const [isMainChecked, setIsMainChecked] = useState(false);
   const [showAddActivityModal, setShowAddActivityModal] = useState(false);
+  const [activityInfo, setActivityInfo] = useState<
+    ActivityInformation | undefined
+  >(undefined);
 
   useEffect(() => {
     agent.UsersWorkers.list()
@@ -75,10 +88,11 @@ const WorkersTable = () => {
     setShowAddActivityModal(true);
   };
 
-  const onCloseAddActivityModal = (data?: any) => {
+  const onCloseAddActivityModal = (data?: ActivityInformation) => {
     setShowAddActivityModal(false);
     if (!data) return;
 
+    setActivityInfo(data);
     const { aptitude } = data;
     onActivitySet(aptitude);
   };
@@ -123,6 +137,14 @@ const WorkersTable = () => {
               </form>
             </div>
             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+              <div className="flex items-center space-x-3 w-full md:w-auto">
+                {activityInfo && (
+                  <CButton className="w-full" colorType="blue">
+                    <FaArrowUp className="mr-2 h-5 w-5" />
+                    {sendActivityAndUsers}
+                  </CButton>
+                )}
+              </div>
               <div className="flex items-center space-x-3 w-full md:w-auto">
                 <CButton className="w-full" onClick={onAddActivityButtonClick}>
                   <IoMdAdd className="mr-2 h-5 w-5" />

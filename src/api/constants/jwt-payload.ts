@@ -5,4 +5,5 @@ export interface JWTPayload {
   role: number;
   jti: string;
   token_type: string;
+  name: string;
 }

@@ -33,12 +33,21 @@ const Router = createBrowserRouter([
         element: <Login />,
       },
       {
-        element: <RequireAuth roles={[SHIFT_MANAGER]} />,
+        element: (
+          <RequireAuth
+            roles={[SHIFT_MANAGER, MANAGER_SINGLE, MANAGER_MULTI, PIGNUS_ADMIN]}
+          />
+        ),
         children: [
           {
             path: homePath,
             element: <HomePage />,
           },
+        ],
+      },
+      {
+        element: <RequireAuth roles={[SHIFT_MANAGER]} />,
+        children: [
           {
             path: workerDetailPath,
             element: <WorkerDetailPage />,

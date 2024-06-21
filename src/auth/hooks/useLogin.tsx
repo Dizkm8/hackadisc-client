@@ -6,9 +6,9 @@ const useTokenStore = () => {
   const { setToken, setRole, setUsername } = useStorage();
 
   const setTokenState = (newToken: string) => {
-    const { role, user_id } = jwtDecode<JWTPayload>(newToken);
+    const { role, name } = jwtDecode<JWTPayload>(newToken);
     setToken(newToken);
-    setUsername(user_id.toString());
+    setUsername(name);
     setRole(role);
   };
 

@@ -10,11 +10,13 @@ import {
 } from "./routes-paths";
 import WorkerDetailPage from "../../workers/pages/WorkerDetailPage";
 import ActivitiesPage from "../../activities/pages/Page";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const Router = createBrowserRouter([
   {
     path: loginPath,
     element: <Root />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: loginPath,

@@ -31,7 +31,7 @@ const notActivePathClassName =
 const Navbar = () => {
   const { logout } = useLogout();
   const navigate = useNavigate();
-  const { username, role } = useUserInformation();
+  const { username } = useUserInformation();
 
   const handleLogout = () => {
     logout();

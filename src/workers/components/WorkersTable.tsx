@@ -7,7 +7,7 @@ import { manyUserWorkerDtoToModel } from "../../common/services/dto-to-model";
 import { UserWorker } from "../models/user-worker";
 import CButton from "../../common/components/CButton";
 import { IoMdAdd } from "react-icons/io";
-import CreateWorkerModal from "./CreateWorkerModal";
+import CreateActivityModal from "./CreateActivityModal";
 
 const columns = [
   {
@@ -54,6 +54,7 @@ const addActivityText = "Nueva Actividad";
 const WorkersTable = () => {
   const [workersData, setWorkersData] = useState<UserWorker[]>([]);
   const [isMainChecked, setIsMainChecked] = useState(false);
+  const [showAddActivityModal, setShowAddActivityModal] = useState(false);
 
   useEffect(() => {
     agent.UsersWorkers.list()
@@ -68,6 +69,14 @@ const WorkersTable = () => {
 
   const updateMainCheck = (isChecked: boolean) => {
     setIsMainChecked(isChecked);
+  };
+
+  const onAddActivityButtonClick = () => {
+    setShowAddActivityModal(true);
+  };
+
+  const onCloseAddActivityModal = () => {
+    setShowAddActivityModal(false);
   };
 
   return (
@@ -107,7 +116,7 @@ const WorkersTable = () => {
             </div>
             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
               <div className="flex items-center space-x-3 w-full md:w-auto">
-                <CButton className="w-full">
+                <CButton className="w-full" onClick={onAddActivityButtonClick}>
                   <IoMdAdd className="mr-2 h-5 w-5" />
                   {addActivityText}
                 </CButton>
@@ -228,7 +237,9 @@ const WorkersTable = () => {
           </nav>
         </div>
       </section>
-      <CreateWorkerModal />
+      {showAddActivityModal && (
+        <CreateActivityModal onClose={onCloseAddActivityModal} />
+      )}
     </>
   );
 };

@@ -12,6 +12,7 @@ const CloseIcon = () => {
         clipRule="evenodd"
       />
     </svg>
+    
   );
 };
 

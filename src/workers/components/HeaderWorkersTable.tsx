@@ -1,5 +1,5 @@
 import { Label } from "flowbite-react";
-import CCheckbox from "../../common/components/CCheckbox";
+import MainCheckbox from "../../common/components/MainCheckbox";
 
 interface Column {
   Header: string;
@@ -17,7 +17,7 @@ const HeaderWorkersTable = ({ columns, updateMainCheck }: Props) => {
       <tr>
         <th scope="col" className="p-4">
           <div className="flex items-center">
-            <CCheckbox id="checkbox-all" onClick={updateMainCheck} />
+            <MainCheckbox id="checkbox-all" onClick={updateMainCheck} />
             <Label htmlFor="checkbox-all" />
           </div>
         </th>

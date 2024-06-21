@@ -4,6 +4,7 @@ import DeleteIcon from "../../common/components/DeleteIcon";
 import EditIcon from "../../common/components/EditIcon";
 import CButton from "../../common/components/CButton";
 import { UserWorker } from "../models/user-worker";
+import { UserWorkerCapacitation } from "../models/user-worker-capacitation";
 
 const getQualificationColor = (qualification: string) => {
   switch (qualification) {
@@ -33,86 +34,89 @@ const getStatusColor = (status: string) => {
   }
 };
 
+const getDefaultChecked = (
+  workersData: UserWorker | UserWorkerCapacitation,
+  defaultCheckbox: boolean
+) => {
+  if ("isChecked" in workersData) {
+    return workersData.isChecked;
+  }
+  return defaultCheckbox;
+};
+
 const getDetailButtonPath = (rut: string) => `/trabajadores/${rut}`;
 
 const commonRowClassName =
   "px-4 py-3 font-small text-gray-900 whitespace-nowrap dark:text-white text-wrap";
 
-const getRows = (workersData: UserWorker[], defaultCheckbox: boolean) =>
-  workersData.map(
-    ({
-      name,
-      rut,
-      email,
-      enterprise,
-      qualification,
-      status,
-      position,
-      area,
-    }) => (
-      <tr
-        key={rut}
-        className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
-      >
-        <td className="p-4 w-4">
-          <div className="flex items-center">
-            <CCheckbox
-              id={rut + "-checkbox"}
-              defaultChecked={defaultCheckbox}
-            />
-            <Label htmlFor={rut + "-checkbox"} />
-          </div>
-        </td>
+const getRows = (
+  workersData: UserWorker[] | UserWorkerCapacitation[],
+  defaultCheckbox: boolean
+) =>
+  workersData.map((worker) => (
+    <tr
+      key={worker.rut}
+      className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      <td className="p-4 w-4">
+        <div className="flex items-center">
+          <CCheckbox
+            id={worker.rut + "-checkbox"}
+            workerRut={worker.rut}
+            defaultChecked={getDefaultChecked(worker, defaultCheckbox)}
+          />
+          <Label htmlFor={worker.rut + "-checkbox"} />
+        </div>
+      </td>
 
-        <td className={commonRowClassName}>{name}</td>
-        <td className={`${commonRowClassName} text-nowrap`}>{rut}</td>
-        <td className={commonRowClassName}>{email}</td>
-        <td className={commonRowClassName}>{enterprise}</td>
-        <td className="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
-          <div className="flex items-center font-medium">
-            <div
-              className={`h-4 w-4 rounded-full inline-block mr-2 ${getQualificationColor(
-                qualification
-              )}`}
-            />
-            {qualification}
-          </div>
-        </td>
-        <td className="px-4 py-3 text-wrap">
-          <span
-            className={`text-xs font-medium px-2 py-0.5 rounded text-wrap ${getStatusColor(
-              status
+      <td className={commonRowClassName}>{worker.name}</td>
+      <td className={`${commonRowClassName} text-nowrap`}>{worker.rut}</td>
+      <td className={commonRowClassName}>{worker.email}</td>
+      <td className={commonRowClassName}>{worker.enterprise}</td>
+      <td className="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+        <div className="flex items-center font-medium">
+          <div
+            className={`h-4 w-4 rounded-full inline-block mr-2 ${getQualificationColor(
+              worker.qualification
             )}`}
+          />
+          {worker.qualification}
+        </div>
+      </td>
+      <td className="px-4 py-3 text-wrap">
+        <span
+          className={`text-xs font-medium px-2 py-0.5 rounded text-wrap ${getStatusColor(
+            status
+          )}`}
+        >
+          {status}
+        </span>
+      </td>
+      <td className={commonRowClassName}>{worker.position}</td>
+      <td className={commonRowClassName}>{worker.area}</td>
+      <td className={commonRowClassName}>
+        <div className="flex items-center space-x-4">
+          <CButton
+            href={getDetailButtonPath(worker.rut)}
+            className=" text-white bg-pignusBlue-500 hover:bg-pignusBlue-800 focus:ring-4 focus:ring-pignusBlue-300"
           >
-            {status}
-          </span>
-        </td>
-        <td className={commonRowClassName}>{position}</td>
-        <td className={commonRowClassName}>{area}</td>
-        <td className={commonRowClassName}>
-          <div className="flex items-center space-x-4">
-            <CButton
-              href={getDetailButtonPath(rut)}
-              className=" text-white bg-pignusBlue-500 hover:bg-pignusBlue-800 focus:ring-4 focus:ring-pignusBlue-300"
-            >
-              <EditIcon />
-              {seeText}
-            </CButton>
-            <CButton colorType="outline">
-              <DeleteIcon />
-              {deleteText}
-            </CButton>
-          </div>
-        </td>
-      </tr>
-    )
-  );
+            <EditIcon />
+            {seeText}
+          </CButton>
+          <CButton colorType="outline">
+            <DeleteIcon />
+            {deleteText}
+          </CButton>
+        </div>
+      </td>
+    </tr>
+  ));
 
 const seeText = "Ver";
 const deleteText = "Borrar";
 
 interface Props {
-  workersData: UserWorker[];
+  workersData: UserWorker[] | UserWorkerCapacitation[];
   isMainCheck: boolean;
 }
 

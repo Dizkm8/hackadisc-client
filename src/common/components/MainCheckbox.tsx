@@ -1,37 +1,24 @@
 import { Checkbox } from "flowbite-react";
 import { useEffect, useState } from "react";
-import useStorage from "../hooks/useStorage";
 
 interface Props {
   id: string;
-  workerRut: string;
   defaultChecked?: boolean;
   className?: string;
   onClick?: (isChecked: boolean) => void;
 }
 
-const CCheckbox = ({
+const MainCheckbox = ({
   id,
-  workerRut,
   defaultChecked = false,
   className,
   onClick,
 }: Props) => {
   const [isCheck, setIsCheck] = useState(defaultChecked);
-  const { addWorkerRut, removeWorkerRut } = useStorage();
 
   const handleOnClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     const isChecked = (e.target as HTMLInputElement).checked;
-    handleWorkerRut(isChecked);
     onClick && onClick(isChecked);
-  };
-
-  const handleWorkerRut = (isChecked: boolean) => {
-    if (isChecked) {
-      addWorkerRut(workerRut);
-    } else {
-      removeWorkerRut(workerRut);
-    }
   };
 
   useEffect(() => {
@@ -49,4 +36,4 @@ const CCheckbox = ({
   );
 };
 
-export default CCheckbox;
+export default MainCheckbox;

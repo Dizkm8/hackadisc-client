@@ -240,9 +240,7 @@ const CreateActivityModal = ({ onClose }: Props) => {
               </div>
 
               <div>
-                <Label
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <Label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   {dateInputName}
                 </Label>
                 <Controller
@@ -294,7 +292,7 @@ const CreateActivityModal = ({ onClose }: Props) => {
               </div>
             </div>
 
-            <div className="items-center justify-end space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+            <div className="items-center justify-end space-y-4 flex flex-col-reverse md:flex-row sm:space-y-0 sm:space-x-4 gap-3 sm:gap-0">
               <button
                 onClick={onDiscard}
                 className="w-full justify-center sm:w-auto text-red-500 inline-flex items-center bg-white hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 "

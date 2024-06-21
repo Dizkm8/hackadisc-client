@@ -4,6 +4,7 @@ import Login from "../../auth/Login";
 import HomePage from "../../home/Page";
 import {
   activitiesPath,
+  dashboardPath,
   homePath,
   loginPath,
   notFoundPath,
@@ -13,7 +14,13 @@ import WorkerDetailPage from "../../workers/pages/WorkerDetailPage";
 import ActivitiesPage from "../../activities/pages/Page";
 import NotFoundPage from "../pages/NotFoundPage";
 import RequireAuth from "./RequireAuth";
-import { SHIFT_MANAGER } from "../../api/constants/roles";
+import {
+  MANAGER_MULTI,
+  MANAGER_SINGLE,
+  PIGNUS_ADMIN,
+  SHIFT_MANAGER,
+} from "../../api/constants/roles";
+import DashboardPage from "../../dashboard/pages/Page";
 
 const Router = createBrowserRouter([
   {
@@ -39,6 +46,17 @@ const Router = createBrowserRouter([
           {
             path: activitiesPath,
             element: <ActivitiesPage />,
+          },
+        ],
+      },
+      {
+        element: (
+          <RequireAuth roles={[MANAGER_SINGLE, MANAGER_MULTI, PIGNUS_ADMIN]} />
+        ),
+        children: [
+          {
+            path: dashboardPath,
+            element: <DashboardPage />,
           },
         ],
       },

@@ -249,10 +249,21 @@ const CreateActivityModal = ({ onClose }: Props) => {
                 <Controller
                   control={control}
                   name="date"
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Debes seleccionar una fecha",
+                    },
+                  }}
                   render={({ field }) => (
-                    <CDatePicker ariaLabel="activity-date-picker" field={field} />
+                    <CDatePicker
+                      ariaLabel="activity-date-picker"
+                      field={field}
+                      color={errors.date?.message ? "failure" : "gray"}
+                    />
                   )}
                 />
+                {errors.date?.message && getErrorMessage(errors.date.message)}
               </div>
 
               <div className="sm:col-span-2">

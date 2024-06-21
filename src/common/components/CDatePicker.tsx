@@ -144,9 +144,10 @@ const customTheme: CustomFlowbiteTheme = {
 interface Props {
   field: any;
   ariaLabel: string;
+  color?: "gray" | "failure";
 }
 
-const CDatePicker = ({ field, ariaLabel }: Props) => {
+const CDatePicker = ({ field, ariaLabel, color = "gray" }: Props) => {
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <Datepicker
@@ -156,8 +157,9 @@ const CDatePicker = ({ field, ariaLabel }: Props) => {
         labelTodayButton="Asignar Hoy"
         showClearButton={false}
         onSelectedDateChanged={(date) => {
-          field.onChange(date.toJSON());
+          field.onChange(date);
         }}
+        color={color}
       />
     </Flowbite>
   );

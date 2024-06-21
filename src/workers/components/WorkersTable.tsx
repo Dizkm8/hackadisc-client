@@ -77,7 +77,14 @@ const WorkersTable = () => {
 
   const onCloseAddActivityModal = (data?: any) => {
     setShowAddActivityModal(false);
-    console.log(data);
+    if (!data) return;
+
+    const { aptitude } = data;
+    onActivitySet(aptitude);
+  };
+
+  const onActivitySet = (aptitude: string) => {
+    console.log(aptitude);
   };
 
   return (

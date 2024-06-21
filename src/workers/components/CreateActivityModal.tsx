@@ -8,7 +8,7 @@ import CTextInput from "../../common/components/CTextInput";
 
 const addActivityText = "Nueva Actividad";
 const categoryInputName = "Categoria";
-const aptitudesInputName = "Aptitudes";
+const aptitudesInputName = "Aptitud";
 const dateInputName = "Fecha";
 
 const activityInput = {
@@ -97,7 +97,7 @@ const errorTextareaClassName =
 type AddActivityInputs = {
   activity: string;
   category: string;
-  aptitudes: string;
+  aptitude: string;
   description: string;
   date: string;
 };
@@ -144,7 +144,7 @@ const CreateActivityModal = ({ onClose }: Props) => {
             <div className="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
                 <Label
-                  htmlFor="activity"
+                  htmlFor="activity-input"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   {activityInput.name}
@@ -204,13 +204,13 @@ const CreateActivityModal = ({ onClose }: Props) => {
 
               <div>
                 <Label
-                  htmlFor="aptitudes"
+                  htmlFor="aptitude"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   {aptitudesInputName}
                 </Label>
                 <select
-                  {...register("aptitudes", {
+                  {...register("aptitude", {
                     required: {
                       value: true,
                       message: "Este campo es requerido",
@@ -222,7 +222,7 @@ const CreateActivityModal = ({ onClose }: Props) => {
                       );
                     },
                   })}
-                  id="aptitudes"
+                  id="aptitude"
                   className={
                     errors.category?.message
                       ? selectErrorClassName
@@ -235,13 +235,12 @@ const CreateActivityModal = ({ onClose }: Props) => {
                     </option>
                   ))}
                 </select>
-                {errors.aptitudes?.message &&
-                  getErrorMessage(errors.aptitudes.message)}
+                {errors.aptitude?.message &&
+                  getErrorMessage(errors.aptitude.message)}
               </div>
 
               <div>
                 <Label
-                  htmlFor="activity-date-picker"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   {dateInputName}

@@ -30,7 +30,7 @@ const getStatusColor = (status: string) => {
     case "Intervenido":
       return "bg-pignus-200 text-pignus-800 dark:bg-pignus-900 dark:text-pignus-300";
     default:
-      return "text-black dark:text-white";
+      return "text-black dark:text-white bg-gray-200 dark:bg-gray-800";
   }
 };
 
@@ -85,7 +85,7 @@ const getRows = (
       </td>
       <td className="px-4 py-3 text-wrap">
         <span
-          className={`text-xs font-medium px-2 py-0.5 rounded text-wrap ${getStatusColor(
+          className={`text-xs font-medium px-2 py-0.5 rounded text-nowrap ${getStatusColor(
             worker.status
           )}`}
         >

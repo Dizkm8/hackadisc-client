@@ -152,6 +152,8 @@ const CDatePicker = ({ ariaLabel }: Props) => {
         minDate={new Date()}
         language="es-CL"
         aria-label={ariaLabel}
+        labelTodayButton="Asignar Hoy"
+        showClearButton={false}
       />
     </Flowbite>
   );

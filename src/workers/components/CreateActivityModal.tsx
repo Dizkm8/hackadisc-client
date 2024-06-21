@@ -3,6 +3,8 @@ import { Label } from "flowbite-react";
 import ScheduleIcon from "../../common/components/ScheduleIcon";
 import CDatePicker from "../../common/components/CDatePicker";
 import CloseModalButton from "../../common/components/CloseModalButton";
+import { SubmitHandler, useForm } from "react-hook-form";
+import CTextInput from "../../common/components/CTextInput";
 
 const addActivityText = "Nueva Actividad";
 const categoryInputName = "Categoria";
@@ -81,11 +83,41 @@ const aptitudesOptions = [
   },
 ];
 
+const selectErrorClassName =
+  "bg-red-50 border border-red-500 text-gray-600 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5";
+const normalSelectClassName =
+  "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pignus-500 focus:border-pignus-500 block w-full p-2.5";
+
+const normalTextareaClassName =
+  "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-pignus-500 focus:border-pignus-500";
+
+const errorTextareaClassName =
+  "block p-2.5 w-full text-sm text-gray-600 bg-red-50 rounded-lg border border-red-500 focus:ring-red-500 focus:border-red-500";
+
+type AddActivityInputs = {
+  activity: string;
+  category: string;
+  aptitudes: string;
+  description: string;
+};
+
+const getErrorMessage = (error: string) => {
+  return <p className="text-red-500 text-xs pl-1">{error}</p>;
+};
+
 interface Props {
   onClose: () => void;
 }
 
 const CreateActivityModal = ({ onClose }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AddActivityInputs>();
+  const onSubmit: SubmitHandler<AddActivityInputs> = (data) =>
+    console.log(data);
+
   const onDiscard = () => {
     onClose();
   };
@@ -105,22 +137,29 @@ const CreateActivityModal = ({ onClose }: Props) => {
             </h3>
             <CloseModalButton onClick={onDiscard} altText="Cerrar Formulario" />
           </div>
-          <form action="#">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4 mb-4 sm:grid-cols-2">
               <div>
                 <Label
-                  htmlFor="brand"
+                  htmlFor="activity"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   {activityInput.name}
                 </Label>
-                <input
+                <CTextInput
+                  registerFunc={register("activity", {
+                    required: {
+                      value: true,
+                      message: "Este campo es requerido",
+                    },
+                  })}
                   type="text"
-                  name="brand"
-                  id="brand"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pignus-600 focus:border-pignus-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pignus-500 dark:focus:border-pignus-500"
+                  id="activity-input"
                   placeholder={activityInput.placeholder}
+                  color={errors.activity?.message ? "failure" : "normal"}
                 />
+                {errors.activity?.message &&
+                  getErrorMessage(errors.activity.message)}
               </div>
 
               <div>
@@ -131,8 +170,24 @@ const CreateActivityModal = ({ onClose }: Props) => {
                   {categoryInputName}
                 </Label>
                 <select
+                  {...register("category", {
+                    required: {
+                      value: true,
+                      message: "Este campo es requerido",
+                    },
+                    validate: (value) => {
+                      return (
+                        value !== "SELECT_CATEGORY" ||
+                        "Selecciona una Categoría"
+                      );
+                    },
+                  })}
                   id="category"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pignus-500 focus:border-pignus-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pignus-500 dark:focus:border-pignus-500"
+                  className={
+                    errors.category?.message
+                      ? selectErrorClassName
+                      : normalSelectClassName
+                  }
                 >
                   {categoryOptions.map(({ id, value, name }) => (
                     <option key={id} value={value}>
@@ -140,18 +195,36 @@ const CreateActivityModal = ({ onClose }: Props) => {
                     </option>
                   ))}
                 </select>
+                {errors.category?.message &&
+                  getErrorMessage(errors.category.message)}
               </div>
 
               <div>
                 <Label
-                  htmlFor="category"
+                  htmlFor="aptitudes"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   {aptitudesInputName}
                 </Label>
                 <select
-                  id="category"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pignus-500 focus:border-pignus-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pignus-500 dark:focus:border-pignus-500"
+                  {...register("aptitudes", {
+                    required: {
+                      value: true,
+                      message: "Este campo es requerido",
+                    },
+                    validate: (value) => {
+                      return (
+                        value !== "SELECT_CATEGORY" ||
+                        "Selecciona una Categoría"
+                      );
+                    },
+                  })}
+                  id="aptitudes"
+                  className={
+                    errors.category?.message
+                      ? selectErrorClassName
+                      : normalSelectClassName
+                  }
                 >
                   {aptitudesOptions.map(({ id, value, name }) => (
                     <option key={id} value={value}>
@@ -159,6 +232,8 @@ const CreateActivityModal = ({ onClose }: Props) => {
                     </option>
                   ))}
                 </select>
+                {errors.aptitudes?.message &&
+                  getErrorMessage(errors.aptitudes.message)}
               </div>
 
               <div>
@@ -179,12 +254,24 @@ const CreateActivityModal = ({ onClose }: Props) => {
                   {descriptionInput.name}
                 </label>
                 <textarea
+                  {...register("description", {
+                    required: {
+                      value: true,
+                      message: "Este campo es requerido",
+                    },
+                  })}
                   id="description"
                   rows={4}
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-pignus-500 focus:border-pignus-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pignus-500 dark:focus:border-pignus-500"
+                  className={
+                    errors.description?.message
+                      ? errorTextareaClassName
+                      : normalTextareaClassName
+                  }
                   placeholder={descriptionInput.placeholder}
                   defaultValue={""}
                 />
+                {errors.description?.message &&
+                  getErrorMessage(errors.description.message)}
               </div>
             </div>
 
@@ -196,7 +283,10 @@ const CreateActivityModal = ({ onClose }: Props) => {
                 <CloseIcon />
                 Discard
               </button>
-              <button className="w-full sm:w-auto text-white justify-center inline-flex items-center bg-pignus-700 hover:bg-pignus-800 focus:ring-4 focus:outline-none focus:ring-pignus-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pignus-600 dark:hover:bg-pignus-700 dark:focus:ring-pignus-800">
+              <button
+                type="submit"
+                className="w-full sm:w-auto text-white justify-center inline-flex items-center bg-pignus-700 hover:bg-pignus-800 focus:ring-4 focus:outline-none focus:ring-pignus-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pignus-600 dark:hover:bg-pignus-700 dark:focus:ring-pignus-800"
+              >
                 <ScheduleIcon />
                 Agendar
               </button>

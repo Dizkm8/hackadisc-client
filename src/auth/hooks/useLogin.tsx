@@ -3,11 +3,12 @@ import useStorage from "../../common/hooks/useStorage";
 import { jwtDecode } from "jwt-decode";
 
 const useTokenStore = () => {
-  const { setToken, setRole } = useStorage();
+  const { setToken, setRole, setUsername } = useStorage();
 
   const setTokenState = (newToken: string) => {
-    const { role } = jwtDecode<JWTPayload>(newToken);
+    const { role, user_id } = jwtDecode<JWTPayload>(newToken);
     setToken(newToken);
+    setUsername(user_id.toString());
     setRole(role);
   };
 

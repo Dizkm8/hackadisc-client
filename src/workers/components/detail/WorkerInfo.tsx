@@ -50,7 +50,7 @@ const WorkerInfo = ({ worker, className }: Props) => {
         </div>
         <img
           className="w-60 h-60 rounded-full mt-5 md:mt-0 md:ml-10"
-          src="https://media.licdn.com/dms/image/D4E35AQEu4OzdezYJNA/profile-framedphoto-shrink_400_400/0/1718143845563?e=1719450000&v=beta&t=KQF-xwuJcNXki7xjb-za-gy6DNmOhxJU1D8dK6nNv9E"
+          src="/jorge-rivera.webp"
         />
       </section>
     </div>

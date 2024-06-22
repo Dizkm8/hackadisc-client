@@ -55,9 +55,14 @@ const Login = () => {
   return (
     <div className="h-dvh w-screen flex justify-center items-center">
       <div className="h-full sm:h-min w-full sm:w-[500px] flex flex-col justify-center items-center bg-gray-100 p-5 sm:p-10 gap-3 rounded-xl drop-shadow-2xl">
-        <h1 className="text-7xl mb-2">
-          Re<span className=" text-pignus-500">haviour</span>
-        </h1>
+        <div className="w-full">
+          <h1 className="text-7xl text-center">
+            Re<span className=" text-pignus-500">haviour</span>
+          </h1>
+          <h2 className="text-6xl mb-2 font-extrabold uppercase text-center">
+            <span className=" text-pignus-500">TZ</span>m
+          </h2>
+        </div>
         <img src="/logo-pignus.webp" alt="Logo Pignus" className="w-[180px]" />
         {isUnAuth && (
           <Alert color="failure" className="w-full" icon={HiInformationCircle}>
@@ -110,7 +115,7 @@ const Login = () => {
               errorText={errors.passwordInput?.message}
             />
           </div>
-          <CButton type="submit" className="mt-3" disabled={loading}>
+          <CButton type="submit" className="mt-3 py-1" disabled={loading}>
             {loading ? <CSpinner /> : "Iniciar Sesión"}
           </CButton>
         </form>

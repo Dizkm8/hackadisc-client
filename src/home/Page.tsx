@@ -5,6 +5,7 @@ import {
   SHIFT_MANAGER,
 } from "../api/constants/roles";
 import useUserInformation from "../auth/hooks/useUserInformation";
+import AIChatManager from "../chat/components/AIChatManager";
 import MainLayout from "../common/layout/MainLayout";
 import DashboardPage from "../dashboard/pages/Page";
 import WorkersPage from "../workers/pages/Page";
@@ -19,7 +20,12 @@ const HomePage = () => {
     element = <DashboardPage />;
   }
 
-  return <MainLayout>{element}</MainLayout>;
+  return (
+    <MainLayout>
+      <AIChatManager />
+      {element}
+    </MainLayout>
+  );
 };
 
 export default HomePage;

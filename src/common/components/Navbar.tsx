@@ -19,7 +19,7 @@ const pages = [
 ];
 const userInformation = {
   email: "jorge.rivera@pignus.cl",
-  pic: "jorge-rivera.webp",
+  pic: "/jorge-rivera.webp",
 };
 const pignusLogoSrc = "/logo-pignus-dark.webp";
 

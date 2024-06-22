@@ -3,14 +3,13 @@ import {
   CompanyInfoDto,
   CompetenceScoreAverageDto,
   ContractItemDto,
-  GetAllCompanyStatisticsDto,
   GradeCountDto,
   GradeCountItemDto,
   InterventionParticipantItemDto,
   InterventionParticipantsDto,
   StateCountItemDto,
-  SubUnitStateCountItemDto,
-} from "../../api/dtos/dashboards/get-all-company-statistics";
+  GetCommonStatisticsDto,
+} from "../../api/dtos/dashboards/get-common-statistics";
 import {
   ActiveActivityItem,
   ActivityParticipantItem,
@@ -18,12 +17,11 @@ import {
   AptitudeScoreAverage,
   CompanyInfo,
   ContractItem,
-  EnterpriseStatistics,
   GradeCount,
   GradeCountItem,
   StatusCountItem,
-  SubUnitStatusCountItem,
-} from "../models/enterprise-statistics";
+  Statistics,
+} from "../models/common-statistics";
 
 export const mapStateCountItemDtoToStatusCountItem = (
   dto: StateCountItemDto[]
@@ -77,16 +75,6 @@ export const mapCompetenceScoreAverageDtoToAptitudeScoreAverage = (
   };
 };
 
-export const mapSubUnitStateCountItemDtoToSubUnitStatusCountItem = (
-  dto: SubUnitStateCountItemDto[]
-): SubUnitStatusCountItem[] => {
-  return dto.map((item) => ({
-    areaId: item.area_id,
-    status: item.state,
-    count: item.count,
-  }));
-};
-
 export const mapActiveInterventionItemDtoToActiveActivityItem = (
   dto: ActiveInterventionItemDto[]
 ): ActiveActivityItem[] => {
@@ -133,27 +121,23 @@ export const mapContractItemDtoToContractItem = (
 };
 
 export const mapCompanyInfoDtoToCompanyInfo = (
-  dto: CompanyInfoDto
-): CompanyInfo => {
-  return {
+  dto: CompanyInfoDto | undefined
+): CompanyInfo | undefined => {
+  return dto && {
     name: dto.name,
     contracts: mapContractItemDtoToContractItem(dto.contracts),
   };
 };
 
-export const mapGetAllCompanyStatisticsDtoToEnterpriseStatistics = (
-  dto: GetAllCompanyStatisticsDto
-): EnterpriseStatistics => {
+export const mapGetCommonStatisticsDtoStatistics = (
+  dto: GetCommonStatisticsDto
+): Statistics => {
   const aptitudeScoreAverage =
     mapCompetenceScoreAverageDtoToAptitudeScoreAverage(
       dto.competence_score_average
     );
   const gradeCount = mapGradeCountDtoToGradeCount(dto.grade_count);
   const statusCount = mapStateCountItemDtoToStatusCountItem(dto.state_count);
-  const subUnitStatusCount =
-    mapSubUnitStateCountItemDtoToSubUnitStatusCountItem(
-      dto.subunit_state_count
-    );
   const activeActivities = mapActiveInterventionItemDtoToActiveActivityItem(
     dto.active_intervention
   );
@@ -168,7 +152,6 @@ export const mapGetAllCompanyStatisticsDtoToEnterpriseStatistics = (
     aptitudeScoreAverage,
     gradeCount,
     statusCount,
-    subUnitStatusCount,
     activeActivities,
     activitiesParticipants,
     enterpriseInfo,

@@ -1,27 +1,31 @@
-import { useEffect } from "react";
-import MainDashboards from "../components/MainDashboards";
 import WelcomeMessage from "../components/WelcomeMessage";
-import agent from "../../api/agent";
-import { GetAllCompanyStatisticsDto } from "../../api/dtos/dashboards/get-all-company-statistics";
-import { mapGetAllCompanyStatisticsDtoToEnterpriseStatistics } from "../utils/mapper";
+import useStorage from "../../common/hooks/useStorage";
+import AdminDashboard from "../components/AdminDashboard";
+import EnterpriseDashboard from "../components/EnterpriseDashboard";
+import AreaDashboard from "../components/AreaDashboard";
+import { MANAGER_MULTI, MANAGER_SINGLE, PIGNUS_ADMIN, SHIFT_MANAGER } from "../../api/constants/roles";
 
 const DashboardPage = () => {
-  useEffect(() => {
-    agent.CompanyDashboard.allStatistics()
-      .then((response: GetAllCompanyStatisticsDto) => {
-        const mappedStatistics =
-          mapGetAllCompanyStatisticsDtoToEnterpriseStatistics(response);
-        console.log(mappedStatistics);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { role } = useStorage();
+
+  const renderDashboard = () => {
+    switch (role) {
+      case PIGNUS_ADMIN:
+        return <AdminDashboard />;
+      case MANAGER_SINGLE:
+      case MANAGER_MULTI:
+        return <EnterpriseDashboard />;
+      case SHIFT_MANAGER:
+        return <AreaDashboard />;
+      default:
+        return <></>;
+    }
+  };
 
   return (
     <div className="w-full h-dvh p-5 md:p-10">
       <WelcomeMessage />
-      <MainDashboards />
+      {renderDashboard()}
     </div>
   );
 };

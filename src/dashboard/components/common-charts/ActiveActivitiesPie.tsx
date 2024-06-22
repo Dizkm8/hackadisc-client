@@ -1,9 +1,9 @@
 import { Pie } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend,
 } from "chart.js";
 import { ActiveActivityItem } from "../../models/common-statistics";
 import { getCategoryESNameById } from "../../../workers/utils/utils";
@@ -12,13 +12,14 @@ ChartJS.register(
     ArcElement,
     Tooltip,
     Legend
-  );
+);
 
 interface Props {
     activeActivities: ActiveActivityItem[];
+    className?: string;
 }
 
-const ActiveActivitiesPie = ({ activeActivities }: Props) => {
+const ActiveActivitiesPie = ({ activeActivities, className }: Props) => {
     const data = {
         labels: activeActivities.map((item) => getCategoryESNameById(item.category)),
         datasets: [
@@ -48,7 +49,7 @@ const ActiveActivitiesPie = ({ activeActivities }: Props) => {
     };
 
     return (
-        <div className="mx-auto h-[600px] overflow-visible">
+        <div className={`mx-auto my-auto ${className}`}>
             <Pie data={data} options={options} />
         </div>
     );

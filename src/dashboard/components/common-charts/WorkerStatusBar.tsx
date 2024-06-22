@@ -20,9 +20,10 @@ ChartJS.register(
 );
 
 interface Props {
-    statusCount: StatusCountItem[];
-  }
-const WorkerStatusBar = ({ statusCount }: Props) => {
+  statusCount: StatusCountItem[];
+  className?: string;
+}
+const WorkerStatusBar = ({ statusCount, className }: Props) => {
 
   const data = {
     labels: [
@@ -45,7 +46,7 @@ const WorkerStatusBar = ({ statusCount }: Props) => {
       },
     ],
   };
-  
+
   const options = {
     plugins: {
       legend: {
@@ -55,9 +56,9 @@ const WorkerStatusBar = ({ statusCount }: Props) => {
   };
 
   return (
-    <div className="mx-auto h-[600px] overflow-visible">
-      <Bar data={data} options={options} />
-    </div>
+    <div className={`mx-auto ${className}`}>
+      < Bar data={data} options={options} />
+    </div >
   );
 };
 

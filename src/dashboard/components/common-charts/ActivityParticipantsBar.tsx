@@ -22,9 +22,10 @@ ChartJS.register(
 
 interface Props {
   activityParticipants: ActivityParticipants;
+  className?: string;
 }
 
-const ActivityParticipantsBar = ({ activityParticipants }: Props) => {
+const ActivityParticipantsBar = ({ activityParticipants, className }: Props) => {
   const dynamismEnergy = ["Dinamismo", "y Energía"];
   const adaptabilityToChange = "Adaptabilidad";
   const initiative = ["Iniciativa y", "Aprendizaje Permanente"];
@@ -43,11 +44,8 @@ const ActivityParticipantsBar = ({ activityParticipants }: Props) => {
   };
 
   for (const [competence, item] of Object.entries(activityParticipants)) {
-    console.log([competence, item]);
     const index = competenceCorrelative[competence];
-    console.log(index);
     for (const entry of item) {
-      console.log(entry);
       values[entry.category - 1][index] = entry.count;
     }
   }
@@ -115,7 +113,7 @@ const ActivityParticipantsBar = ({ activityParticipants }: Props) => {
   };
 
   return (
-    <div className="mx-auto h-[600px] overflow-visible">
+    <div className={`mx-auto ${className}`}>
       <Bar data={data} options={options} />
     </div>
   );

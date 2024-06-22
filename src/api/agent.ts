@@ -53,10 +53,13 @@ const Activities = {
   },
 };
 
-const CompanyDashboard = {
-  allStatistics: () => requests.get("api/dashboard/company/"),
+const Dashboard = {
+  areaStatistics: () => requests.get("api/dashboard/area/"),
+  companyStatistics: () => requests.get("api/dashboard/company/"),
+  adminStatistics: () => requests.get("api/dashboard/admin/"),
+  adminCompaniesStatistics: () => requests.get("api/dashboard/admin/companies/"),
 };
 
-const agent = { Auth, UsersWorkers, Activities, CompanyDashboard };
+const agent = { Auth, UsersWorkers, Activities, Dashboard };
 
 export default agent;

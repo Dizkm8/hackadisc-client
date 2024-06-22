@@ -1,0 +1,14 @@
+export interface CompanySummaryItemDto {
+    company_name: string;
+    worker_count: number;
+    evaluation_count: number;
+    intervention_count: number;
+    main_company?: string;
+    start_date: Date;
+    end_date: Date;
+    remaining_time: string;
+} 
+
+export interface GetCompaniesSummaryDto {
+    companies: CompanySummaryItemDto[];
+}

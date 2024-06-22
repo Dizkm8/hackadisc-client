@@ -101,7 +101,6 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
   };
 
   const completeActivity = () => {
-    console.log(files);
     agent.Activities.complete(activity.id, files)
       .then(() => {
         handleClose();

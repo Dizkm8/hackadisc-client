@@ -18,4 +18,5 @@ export interface MultiCompanyInfo extends CompanyInfo {
 
 export interface EnterpriseStatistics extends Statistics {
   subUnitStatusCount: SubUnitStatusCountItem[];
+  enterpriseInfo: MultiCompanyInfo | CompanyInfo;
 }

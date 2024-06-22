@@ -9,6 +9,7 @@ import WorkerStatusBar from "./common-charts/WorkerStatusBar";
 import { Statistics } from "../models/common-statistics";
 import { mapGetCommonStatisticsDtoStatistics } from "../utils/mapper";
 import { GetCommonStatisticsDto } from "../../api/dtos/dashboards/get-common-statistics";
+import EnterpriseTable from "./enterprise-table/EnterpriseTable";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState<Statistics>();
@@ -48,6 +49,10 @@ const AdminDashboard = () => {
       <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
       
       <ActiveActivitiesPie activeActivities={stats.activeActivities} />
+
+      <div className="col-span-2" >
+        <EnterpriseTable />
+      </div>
     </div>
   );
 };

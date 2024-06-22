@@ -1,8 +1,8 @@
-export interface CompanySummaryItem {
+export interface EnterpriseSummaryItem {
     name: string;
     workerCount: number;
     evaluatedWorkerCount: number;
     activityCount: number;
-    mainEnterprise: string;
+    mainEnterprise?: string;
     remainingTime: string;
 } 

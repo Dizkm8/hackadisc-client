@@ -1,4 +1,4 @@
-export interface CompanySummaryItemDto {
+export interface EnterpriseSummaryItemDto {
     company_name: string;
     worker_count: number;
     evaluation_count: number;
@@ -9,6 +9,6 @@ export interface CompanySummaryItemDto {
     remaining_time: string;
 } 
 
-export interface GetCompaniesSummaryDto {
-    companies: CompanySummaryItemDto[];
+export interface GetEnterpriseSummaryDto {
+    results: EnterpriseSummaryItemDto[];
 }

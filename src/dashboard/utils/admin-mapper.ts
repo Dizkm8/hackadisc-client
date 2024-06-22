@@ -1,15 +1,15 @@
-import { CompanySummaryItemDto } from "../../api/dtos/dashboards/get-companies-summary";
-import { CompanySummaryItem } from "../models/admin-statistics";
+import { EnterpriseSummaryItemDto } from "../../api/dtos/dashboards/get-companies-summary";
+import { EnterpriseSummaryItem } from "../models/admin-statistics";
 
-export const mapCompanySummaryItemDtoToCompanySummaryItem = (
-    dto: CompanySummaryItemDto[]
-  ): CompanySummaryItem[] => {
+export const mapEnterpriseSummaryItemDtoToEnterpriseSummaryItem = (
+    dto: EnterpriseSummaryItemDto[]
+  ): EnterpriseSummaryItem[] => {
     return dto.map((item) => ({
         name: item.company_name,
         workerCount: item.worker_count,
         evaluatedWorkerCount: item.evaluation_count,
         activityCount: item.intervention_count,
-        mainEnterprise: item.main_company || "",
+        mainEnterprise: item.main_company || "N/A",
         remainingTime: item.remaining_time,
     }));
   };

@@ -5,11 +5,11 @@ import HomePage from "../../home/Page";
 import {
   activitiesPath,
   dashboardPath,
-  dashboardPathV2,
   homePath,
   loginPath,
   notFoundPath,
   workerDetailPath,
+  workersPath,
 } from "./routes-paths";
 import WorkerDetailPage from "../../workers/pages/WorkerDetailPage";
 import ActivitiesPage from "../../activities/pages/Page";
@@ -22,7 +22,7 @@ import {
   SHIFT_MANAGER,
 } from "../../api/constants/roles";
 import DashboardPage from "../../dashboard/pages/Page";
-import AreaDashboardPage from "../../home/AreaDashboardPage";
+import WorkersPage from "../../workers/pages/Page";
 
 const Router = createBrowserRouter([
   {
@@ -51,6 +51,10 @@ const Router = createBrowserRouter([
         element: <RequireAuth roles={[SHIFT_MANAGER]} />,
         children: [
           {
+            path: workersPath,
+            element: <WorkersPage />,
+          },
+          {
             path: workerDetailPath,
             element: <WorkerDetailPage />,
           },
@@ -70,15 +74,6 @@ const Router = createBrowserRouter([
           {
             path: dashboardPath,
             element: <DashboardPage />,
-          },
-        ],
-      },
-      {
-        element: <RequireAuth roles={[SHIFT_MANAGER]} />,
-        children: [
-          {
-            path: dashboardPathV2,
-            element: <AreaDashboardPage />,
           },
         ],
       },

@@ -1,11 +1,7 @@
 import { SHIFT_MANAGER } from "../../api/constants/roles";
 import useUserInformation from "../../auth/hooks/useUserInformation";
 import Navbar from "../components/Navbar";
-import {
-  activitiesPath,
-  dashboardPathV2,
-  homePath,
-} from "../router/routes-paths";
+import { activitiesPath, homePath, workersPath } from "../router/routes-paths";
 
 interface Props {
   children: React.ReactNode;
@@ -24,8 +20,8 @@ const MainLayout = ({ children }: Props) => {
       href: activitiesPath,
     },
     {
-      name: "Estadísticas",
-      href: dashboardPathV2,
+      name: "Trabajadores",
+      href: workersPath,
     },
   ];
 

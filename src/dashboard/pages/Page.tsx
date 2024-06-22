@@ -6,7 +6,9 @@ import {
   MANAGER_MULTI,
   MANAGER_SINGLE,
   PIGNUS_ADMIN,
+  SHIFT_MANAGER,
 } from "../../api/constants/roles";
+import AreaDashboard from "../components/AreaDashboard";
 
 const DashboardPage = () => {
   const { role } = useStorage();
@@ -18,6 +20,8 @@ const DashboardPage = () => {
       case MANAGER_SINGLE:
       case MANAGER_MULTI:
         return <EnterpriseDashboard />;
+      case SHIFT_MANAGER:
+        return <AreaDashboard />;
       default:
         return <></>;
     }

@@ -60,7 +60,7 @@ const Router = createBrowserRouter([
       },
       {
         element: (
-          <RequireAuth roles={[MANAGER_SINGLE, MANAGER_MULTI, PIGNUS_ADMIN]} />
+          <RequireAuth roles={[SHIFT_MANAGER, MANAGER_SINGLE, MANAGER_MULTI, PIGNUS_ADMIN]} />
         ),
         children: [
           {

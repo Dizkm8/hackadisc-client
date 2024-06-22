@@ -14,7 +14,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaRegFilePdf } from "react-icons/fa";
 import agent from "../../api/agent";
 
-const getDateText = (date: Date): string => {
+export const getDateText = (date: Date): string => {
   const daysOfWeek = [
     "Domingo",
     "Lunes",

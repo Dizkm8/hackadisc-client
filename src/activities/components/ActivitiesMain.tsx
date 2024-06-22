@@ -11,8 +11,10 @@ import LoadingSpinner from "../../common/components/LoadingSpinner";
 import { GetActivityDetailDto } from "../../api/dtos/get-activity-detail-dto";
 import ActivityDetailModal from "./ActivityDetailModal";
 import { ActivityDetail } from "../models/activity-detail";
+import ModalLoader from "./ModalLoader";
 
 const ActivitiesMain = () => {
+  const [loadingActivity, setLoadingActivity] = useState<boolean>(false);
   const [loadingData, setLoadingData] = useState<boolean>(true);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
@@ -32,13 +34,15 @@ const ActivitiesMain = () => {
   }, []);
 
   const onActivityClick = (activity: Activity) => {
+    setLoadingActivity(true);
     const { id } = activity;
     agent.Activities.findOne(id)
       .then((response: GetActivityDetailDto) => {
         const mappedActivity = mapDetailActivityDtoToModel(id, response);
         setSelectedActivity(mappedActivity);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => setLoadingActivity(false));
   };
 
   const onActivityDetailModalClose = () => {
@@ -48,6 +52,7 @@ const ActivitiesMain = () => {
   if (loadingData) {
     return <LoadingSpinner />;
   }
+
   return (
     <>
       {selectedActivity && (
@@ -56,6 +61,7 @@ const ActivitiesMain = () => {
           onClose={onActivityDetailModalClose}
         />
       )}
+      {loadingActivity && <ModalLoader />}
       <ActivitiesCalendar
         activities={activities}
         onActivityClick={onActivityClick}

@@ -21,17 +21,10 @@ ChartJS.register(
 
 interface Props {
   statusCount: StatusCountItem[];
-  className?: string;
 }
-const WorkerStatusBar = ({ statusCount, className }: Props) => {
-
+const WorkerStatusBar = ({ statusCount }: Props) => {
   const data = {
-    labels: [
-      "No evaluado",
-      "Evaluado",
-      "En intervención",
-      "Intervenido",
-    ],
+    labels: ["No evaluado", "Evaluado", "En intervención", "Intervenido"],
     datasets: [
       {
         label: "Estados",
@@ -52,13 +45,20 @@ const WorkerStatusBar = ({ statusCount, className }: Props) => {
       legend: {
         display: false,
       },
+      title: {
+        display: true,
+        text: "Estado de los trabajadores",
+        font: {
+          size: 18,
+        },
+      },
     },
   };
 
   return (
-    <div className={`mx-auto ${className}`}>
-      < Bar data={data} options={options} />
-    </div >
+    <div className="mx-auto w-full md:w-[600px] overflow-scroll md:overflow-auto">
+      <Bar data={data} options={options} />
+    </div>
   );
 };
 

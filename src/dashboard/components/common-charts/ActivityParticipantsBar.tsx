@@ -22,10 +22,9 @@ ChartJS.register(
 
 interface Props {
   activityParticipants: ActivityParticipants;
-  className?: string;
 }
 
-const ActivityParticipantsBar = ({ activityParticipants, className }: Props) => {
+const ActivityParticipantsBar = ({ activityParticipants }: Props) => {
   const dynamismEnergy = ["Dinamismo", "y Energía"];
   const adaptabilityToChange = "Adaptabilidad";
   const initiative = ["Iniciativa y", "Aprendizaje Permanente"];
@@ -101,6 +100,13 @@ const ActivityParticipantsBar = ({ activityParticipants, className }: Props) => 
       legend: {
         display: true,
       },
+      title: {
+        display: true,
+        text: "Cantidad de Participantes en Actividades",
+        font: {
+          size: 18,
+        },
+      },
     },
     scales: {
       x: {
@@ -113,7 +119,7 @@ const ActivityParticipantsBar = ({ activityParticipants, className }: Props) => 
   };
 
   return (
-    <div className={`mx-auto ${className}`}>
+    <div className="mx-auto w-full md:w-[600px] overflow-scroll md:overflow-auto">
       <Bar data={data} options={options} />
     </div>
   );

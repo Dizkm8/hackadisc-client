@@ -21,9 +21,8 @@ ChartJS.register(
 
 interface Props {
   averages: AptitudeScoreAverage;
-  className?: string;
 }
-const AptitudeRadar = ({ averages, className }: Props) => {
+const AptitudeRadar = ({ averages }: Props) => {
   const dynamismEnergy = ["Dinamismo", "y Energía"];
   const adaptabilityToChange = "Adaptabilidad";
   const initiative = ["Iniciativa y", "Aprendizaje Permanente"];
@@ -69,8 +68,7 @@ const AptitudeRadar = ({ averages, className }: Props) => {
         display: false,
       },
       title: {
-          display: true,
-          text: "Calificación promedio",
+        display: false,
       },
     },
     scales: {
@@ -98,7 +96,8 @@ const AptitudeRadar = ({ averages, className }: Props) => {
   };
 
   return (
-    <div className={`mx-auto ${className}`}>
+    <div className="mx-auto w-full md:w-[600px] overflow-scroll md:overflow-auto">
+      <h3 className="text-center font-bold uppercase">Radar de Competencias</h3>
       <Radar data={data} options={options} />
     </div>
   );

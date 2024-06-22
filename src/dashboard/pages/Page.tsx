@@ -3,7 +3,12 @@ import useStorage from "../../common/hooks/useStorage";
 import AdminDashboard from "../components/AdminDashboard";
 import EnterpriseDashboard from "../components/EnterpriseDashboard";
 import AreaDashboard from "../components/AreaDashboard";
-import { MANAGER_MULTI, MANAGER_SINGLE, PIGNUS_ADMIN, SHIFT_MANAGER } from "../../api/constants/roles";
+import {
+  MANAGER_MULTI,
+  MANAGER_SINGLE,
+  PIGNUS_ADMIN,
+  SHIFT_MANAGER,
+} from "../../api/constants/roles";
 
 const DashboardPage = () => {
   const { role } = useStorage();
@@ -25,6 +30,7 @@ const DashboardPage = () => {
   return (
     <div className="w-full p-5 md:p-10">
       <WelcomeMessage />
+      <hr className="mt-5 md:mt-10 mb-3 border-2 border-gray-100" />
       {renderDashboard()}
     </div>
   );

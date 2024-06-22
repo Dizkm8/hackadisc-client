@@ -17,13 +17,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     agent.Dashboard.adminStatistics()
       .then((response: GetCommonStatisticsDto) => {
-        setStats(
-          mapGetCommonStatisticsDtoStatistics(response)
-        );
+        setStats(mapGetCommonStatisticsDtoStatistics(response));
       })
       .catch((error) => {
         console.error(error);
-      }).finally(() => {
+      })
+      .finally(() => {
         setDataLoading(false);
       });
   }, []);
@@ -33,12 +32,22 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 align-middle items-center justify-center">
+    <div className="w-full h-full gap-10 md:gap-0 grid grid-cols-1 lg:grid-cols-2 align-middle items-center justify-center pb-100">
       <AptitudeRadar averages={stats.aptitudeScoreAverage} />
+      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+
       <GradeHeatmap gradeCount={stats.gradeCount} height={400} width={600} />
-      <WorkerStatusBar statusCount={stats.statusCount} className="w-[600px]" />
-      <ActivityParticipantsBar activityParticipants={stats.activitiesParticipants} className="my-auto w-[600px]" />
-      <ActiveActivitiesPie activeActivities={stats.activeActivities} className="w-[600px]" />
+      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+
+      <WorkerStatusBar statusCount={stats.statusCount} />
+      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+
+      <ActivityParticipantsBar
+        activityParticipants={stats.activitiesParticipants}
+      />
+      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+      
+      <ActiveActivitiesPie activeActivities={stats.activeActivities} />
     </div>
   );
 };

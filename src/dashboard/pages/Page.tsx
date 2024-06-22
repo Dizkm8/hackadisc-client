@@ -23,7 +23,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="w-full h-dvh p-5 md:p-10">
+    <div className="w-full p-5 md:p-10">
       <WelcomeMessage />
       {renderDashboard()}
     </div>

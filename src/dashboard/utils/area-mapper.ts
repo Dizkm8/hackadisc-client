@@ -37,7 +37,7 @@ export const mapActivitySummaryItemDtoToActivitySummaryItemItem = (
   return dto.map((item) => ({ 
     name: item.name,
     count: item.count,
-    date: item.date,
+    date: new Date(item.date),
   }));
 };
 

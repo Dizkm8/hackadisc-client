@@ -10,7 +10,7 @@ import { useState } from "react";
 import agent from "../../api/agent";
 import BottomActivityDetailModal from "./BottomActivityDetailModal";
 
-const getDateText = (date: Date): string => {
+export const getDateText = (date: Date): string => {
   const daysOfWeek = [
     "Domingo",
     "Lunes",

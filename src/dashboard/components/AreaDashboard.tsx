@@ -9,13 +9,14 @@ import WorkerStatusBar from "./common-charts/WorkerStatusBar";
 import { AreaStatistics } from "../models/area-statistics";
 import { mapGetAllAreaStatisticsDtoDtoToAreaStatistics } from "../utils/area-mapper";
 import { GetAllAreaStatisticsDto } from "../../api/dtos/dashboards/get-all-area-statistics";
+import ActivitySummaryTable from "./ActivitySummaryTable";
 
 const AreaDashboard = () => {
   const [stats, setStats] = useState<AreaStatistics>();
   const [dataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
-    agent.Dashboard.adminStatistics()
+    agent.Dashboard.areaStatistics()
       .then((response: GetAllAreaStatisticsDto) => {
         setStats(mapGetAllAreaStatisticsDtoDtoToAreaStatistics(response));
       })
@@ -44,6 +45,7 @@ const AreaDashboard = () => {
         activeActivities={stats.activeActivities}
         className="w-[600px]"
       />
+      <ActivitySummaryTable summary={stats.activitySummary} />
     </div>
   );
 };

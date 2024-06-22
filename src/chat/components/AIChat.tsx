@@ -126,9 +126,9 @@ const AIChat = () => {
               <div
                 className={`ml-3 bg-gray-100 p-3 rounded-lg ${messageWidth}`}
               >
-                <p className="text-sm text-gray-800">
+                <span className="text-sm text-gray-800">
                   <WaitingMessageSpinner />
-                </p>
+                </span>
               </div>
             </div>
           )}

@@ -27,11 +27,16 @@ export const mapDetailActivityDtoToModel = (
     date: new Date(dto.date),
     category: dto.category,
     aptitude: dto.competence,
+    isCompleted: dto.is_completed,
     participants: dto.participants.map((participant) => ({
       rut: participant.rut,
       username: participant.user_name,
       email: participant.email,
       area: participant.area_name,
+    })),
+    files: dto.files.map((file) => ({
+      name: file.name,
+      url: file.url,
     })),
   };
 };

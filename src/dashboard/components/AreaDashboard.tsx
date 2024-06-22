@@ -17,13 +17,12 @@ const AreaDashboard = () => {
   useEffect(() => {
     agent.Dashboard.adminStatistics()
       .then((response: GetAllAreaStatisticsDto) => {
-        setStats(
-          mapGetAllAreaStatisticsDtoDtoToAreaStatistics(response)
-        );
+        setStats(mapGetAllAreaStatisticsDtoDtoToAreaStatistics(response));
       })
       .catch((error) => {
         console.error(error);
-      }).finally(() => {
+      })
+      .finally(() => {
         setDataLoading(false);
       });
   }, []);
@@ -37,8 +36,14 @@ const AreaDashboard = () => {
       <AptitudeRadar averages={stats.aptitudeScoreAverage} />
       <GradeHeatmap gradeCount={stats.gradeCount} height={400} width={600} />
       <WorkerStatusBar statusCount={stats.statusCount} className="w-[600px]" />
-      <ActivityParticipantsBar activityParticipants={stats.activitiesParticipants} className="my-auto w-[600px]" />
-      <ActiveActivitiesPie activeActivities={stats.activeActivities} className="w-[600px]" />
+      <ActivityParticipantsBar
+        activityParticipants={stats.activitiesParticipants}
+        className="my-auto w-[600px]"
+      />
+      <ActiveActivitiesPie
+        activeActivities={stats.activeActivities}
+        className="w-[600px]"
+      />
     </div>
   );
 };

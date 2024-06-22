@@ -5,6 +5,11 @@ export interface RelatedActivityDetailUsers {
   area: string;
 }
 
+export interface FilesActivityDetail {
+  name: string;
+  url: string;
+}
+
 export interface ActivityDetail {
   id: number;
   name: string;
@@ -12,5 +17,7 @@ export interface ActivityDetail {
   date: Date;
   category: number;
   aptitude: number;
+  isCompleted: boolean;
   participants: RelatedActivityDetailUsers[];
+  files: FilesActivityDetail[];
 }

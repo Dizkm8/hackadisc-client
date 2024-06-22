@@ -2,8 +2,9 @@ import axios, { AxiosResponse } from "axios";
 import { AuthDto } from "./dtos/auth-dto";
 import { ActivityInformation } from "../workers/models/activity-information";
 import { mapAssignUsersToActivity } from "./utils/mapper";
+import { apiUrl } from "./config/envs";
 
-axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = apiUrl;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use((config) => {
@@ -57,7 +58,8 @@ const Dashboard = {
   areaStatistics: () => requests.get("api/dashboard/area/"),
   companyStatistics: () => requests.get("api/dashboard/company/"),
   adminStatistics: () => requests.get("api/dashboard/admin/"),
-  adminCompaniesStatistics: () => requests.get("api/dashboard/admin/companies/"),
+  adminCompaniesStatistics: () =>
+    requests.get("api/dashboard/admin/companies/"),
 };
 
 const agent = { Auth, UsersWorkers, Activities, Dashboard };

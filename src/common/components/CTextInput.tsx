@@ -19,7 +19,7 @@ const CTextInput = React.forwardRef<HTMLInputElement, Props>(
       "bg-red-50 border-red-500 text-red-900 focus:ring-red-500 focus:border-red-500";
 
     const baseColor = props.color === "normal" ? normalColor : redColor;
-    const baseClassName = `${baseColor} border text-sm rounded-lg  block w-full p-2.5 ${className}`;
+    const baseClassName = `${baseColor} border text-sm rounded-lg  block w-full p-2.5 text-lg ${className}`;
 
     return (
       <>
@@ -29,6 +29,7 @@ const CTextInput = React.forwardRef<HTMLInputElement, Props>(
           {...props}
           readOnly={readonly}
           className={baseClassName}
+          style={{ fontSize: "16px" }}
         />
         {errorText && (
           <span className="font-medium text-red-500">{errorText}</span>

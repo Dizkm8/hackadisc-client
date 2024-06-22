@@ -184,6 +184,7 @@ const WorkersTable = () => {
                     <SearchIcon />
                   </div>
                   <input
+                    style={{ fontSize: "16px" }}
                     id="worker-search"
                     onChange={(e) => {
                       const searchValue = e.target.value.toLowerCase();

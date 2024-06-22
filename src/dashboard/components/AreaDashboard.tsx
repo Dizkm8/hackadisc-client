@@ -33,26 +33,30 @@ const AreaDashboard = () => {
   }
 
   return (
-    <div className="w-full h-full gap-10 md:gap-0 grid grid-cols-1 lg:grid-cols-2 align-middle items-center justify-center pb-100">
-      <AptitudeRadar averages={stats.aptitudeScoreAverage} />
-      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+    <>
+      <div className="w-full h-full gap-10 md:gap-0 grid grid-cols-1 lg:grid-cols-2 align-middle items-center justify-center pb-100">
+        <AptitudeRadar averages={stats.aptitudeScoreAverage} />
+        <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
 
-      <GradeHeatmap gradeCount={stats.gradeCount} height={400} width={600} />
-      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+        <GradeHeatmap gradeCount={stats.gradeCount} height={400} width={600} />
+        <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
 
-      <WorkerStatusBar statusCount={stats.statusCount} />
-      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+        <WorkerStatusBar statusCount={stats.statusCount} />
+        <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
 
-      <ActivityParticipantsBar
-        activityParticipants={stats.activitiesParticipants}
+        <ActivityParticipantsBar
+          activityParticipants={stats.activitiesParticipants}
+        />
+        <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+
+        <ActiveActivitiesPie activeActivities={stats.activeActivities} />
+        <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
+      </div>
+      <ActivitySummaryTable
+        summary={stats.activitySummary}
+        className="mt-3 md:mt-10"
       />
-      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
-
-      <ActiveActivitiesPie activeActivities={stats.activeActivities} />
-      <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
-
-      <ActivitySummaryTable summary={stats.activitySummary} />
-    </div>
+    </>
   );
 };
 

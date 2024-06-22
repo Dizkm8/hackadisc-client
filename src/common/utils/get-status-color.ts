@@ -5,7 +5,7 @@ export const getSpanStatusColor = (status: string) => {
     case "En Intervención":
       return "bg-pignusBlue-100 text-pignusBlue-800 dark:bg-pignusBlue-900 dark:text-pignusBlue-300";
     case "Intervenido":
-      return "  ";
+      return "bg-pignus-100 text-pignus-800 dark:bg-pignus-900 dark:text-pignus-300";
     default:
       return "text-black dark:text-white bg-gray-200 dark:bg-gray-800";
   }

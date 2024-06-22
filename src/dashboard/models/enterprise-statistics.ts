@@ -4,25 +4,18 @@ import {
   StatusCountItem,
   ActiveActivityItem,
   ActivityParticipants,
+  Statistics,
   CompanyInfo,
 } from "./common-statistics";
 
-export interface SubUnitStatusCountItem {
+export interface SubUnitStatusCountItem extends StatusCountItem{
   areaId: number;
-  status: number;
-  count: number;
 }
 
 export interface MultiCompanyInfo extends CompanyInfo {
   subcompanies: CompanyInfo[];
 }
 
-export interface EnterpriseStatistics {
-  aptitudeScoreAverage: AptitudeScoreAverage;
-  gradeCount: GradeCount;
-  statusCount: StatusCountItem[];
+export interface EnterpriseStatistics extends Statistics {
   subUnitStatusCount: SubUnitStatusCountItem[];
-  activeActivities: ActiveActivityItem[];
-  activitiesParticipants: ActivityParticipants;
-  enterpriseInfo: CompanyInfo;
 }

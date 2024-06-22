@@ -57,3 +57,13 @@ export interface CompanyInfo {
   name: string;
   contracts: ContractItem[];
 }
+
+
+export interface Statistics {
+  aptitudeScoreAverage: AptitudeScoreAverage;
+  gradeCount: GradeCount;
+  statusCount: StatusCountItem[];
+  activeActivities: ActiveActivityItem[];
+  activitiesParticipants: ActivityParticipants;
+  enterpriseInfo: CompanyInfo;
+}

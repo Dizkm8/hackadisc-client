@@ -1,6 +1,7 @@
 import ActiveActivitiesPie from "./common-charts/ActiveActivitiesPie";
 import ActivityParticipantsBar from "./common-charts/ActivityParticipantsBar";
 import AptitudeRadar from "./common-charts/AptitudeRadar";
+import GradeHeatmap from "./common-charts/GradeHeatmap";
 import WorkerStatusBar from "./common-charts/WorkerStatusBar";
 
 const MainDashboards = () => {
@@ -30,6 +31,44 @@ const MainDashboards = () => {
       count: 28,
     },
   ];
+  const gradeCount = {
+    "adaptabilityToChange": {
+      "D": 95,
+      "B": 91,
+      "A": 89,
+      "C": 77
+    },
+    "safeConduct": {
+      "A": 88,
+      "B": 95,
+      "C": 85,
+      "D": 84
+    },
+    "dynamismEnergy": {
+      "C": 100,
+      "B": 82,
+      "D": 85,
+      "A": 85
+    },
+    "personalEffectiveness": {
+      "D": 91,
+      "A": 95,
+      "C": 80,
+      "B": 86
+    },
+    "initiative": {
+      "B": 92,
+      "A": 99,
+      "D": 91,
+      "C": 70
+    },
+    "workingUnderPressure": {
+      "A": 100,
+      "C": 81,
+      "D": 93,
+      "B": 78
+    }
+  };
   const participants = {
     first: [
       {
@@ -95,6 +134,7 @@ const MainDashboards = () => {
       <WorkerStatusBar statusCount={status} />
       <ActivityParticipantsBar activityParticipants={participants} />
       <ActiveActivitiesPie activeActivities={activeActivities} />
+      <GradeHeatmap gradeCount={gradeCount} />
     </>
   );
 };

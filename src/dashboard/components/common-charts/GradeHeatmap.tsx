@@ -1,5 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import { GradeCount } from "../../models/common-statistics";
+import { ApexOptions } from "apexcharts";
 
 interface Props {
     gradeCount: GradeCount;
@@ -14,15 +15,15 @@ const GradeHeatmap = ({ gradeCount }: Props) => {
     const safeConduct = ["Conducta Segura", "y Autocuidado"];
     const workingUnderPressure = ["Trabajo", " Bajo Presión"];
 
-    const option= {
+    const option: ApexOptions = {
         chart: {
-          height: 450,
+          height: 50,
           type: 'heatmap',
         },
         dataLabels: {
           enabled: false
         },
-        colors: colors,
+        colors: ["#7eca27", "#2857de", "#ffcc01", "#ef4444"].reverse(),
         xaxis: {
           type: 'category',
           categories: [
@@ -33,9 +34,6 @@ const GradeHeatmap = ({ gradeCount }: Props) => {
             safeConduct,
             workingUnderPressure,
             ]
-        },
-        title: {
-          text: 'HeatMap Chart (Different color shades for each series)'
         },
         grid: {
           padding: {
@@ -89,11 +87,11 @@ const GradeHeatmap = ({ gradeCount }: Props) => {
             gradeCount.workingUnderPressure.D
         ]
         }
-    ];
+    ].reverse();
 
     return (
         <div className="mx-auto h-[600px] overflow-visible">
-            <ReactApexChart  options={option} series={series} type="heatmap" />
+            <ReactApexChart options={option} series={series} type="heatmap" height={400} width={500}/>
         </div>
     );
 }

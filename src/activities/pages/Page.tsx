@@ -1,9 +1,11 @@
+import AIChatManager from "../../chat/components/AIChatManager";
 import MainLayout from "../../common/layout/MainLayout";
 import ActivitiesMain from "../components/ActivitiesMain";
 
 const ActivitiesPage = () => {
   return (
     <MainLayout>
+      <AIChatManager />
       <h1 className="text-center text-5xl font-semibold md:font-normal md:text-6xl my-5">
         Actividades
       </h1>

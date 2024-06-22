@@ -12,7 +12,7 @@ interface Props {
 
 const ActivitiesCalendar = ({ activities, onActivityClick }: Props) => {
   return (
-    <div>
+    <div className="mb-[120px]">
       <Calendar
         className="w-full h-dvh px-0 md:px-10"
         localizer={localizer}

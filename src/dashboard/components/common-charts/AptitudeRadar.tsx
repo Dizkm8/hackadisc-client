@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { AptitudeScoreAverage } from "../models/enterprise-statistics";
+import { AptitudeScoreAverage } from "../../models/common-statistics";
 
 ChartJS.register(
   RadialLinearScale,
@@ -22,7 +22,7 @@ ChartJS.register(
 interface Props {
   averages: AptitudeScoreAverage;
 }
-const EnterpriseAptitudeRadar = ({ averages }: Props) => {
+const AptitudeRadar = ({ averages }: Props) => {
   const dynamismEnergy = ["Dinamismo", "y Energía"];
   const adaptabilityToChange = "Adaptabilidad";
   const initiative = ["Iniciativa y", "Aprendizaje Permanente"];
@@ -99,4 +99,4 @@ const EnterpriseAptitudeRadar = ({ averages }: Props) => {
   );
 };
 
-export default EnterpriseAptitudeRadar;
+export default AptitudeRadar;

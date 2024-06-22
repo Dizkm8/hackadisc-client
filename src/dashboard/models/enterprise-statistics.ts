@@ -1,32 +1,11 @@
-export interface AptitudeScoreAverage {
-  dynamismEnergy: number;
-  adaptabilityToChange: number;
-  initiative: number;
-  personalEffectiveness: number;
-  safeConduct: number;
-  workingUnderPressure: number;
-}
-
-export interface GradeCountItem {
-  A: number;
-  B: number;
-  C: number;
-  D: number;
-}
-
-export interface GradeCount {
-  adaptabilityToChange: GradeCountItem;
-  safeConduct: GradeCountItem;
-  dynamismEnergy: GradeCountItem;
-  personalEffectiveness: GradeCountItem;
-  initiative: GradeCountItem;
-  workingUnderPressure: GradeCountItem;
-}
-
-export interface StatusCountItem {
-  status: number;
-  count: number;
-}
+import {
+  AptitudeScoreAverage,
+  GradeCount,
+  StatusCountItem,
+  ActiveActivityItem,
+  ActivityParticipants,
+  CompanyInfo,
+} from "./common-statistics";
 
 export interface SubUnitStatusCountItem {
   areaId: number;
@@ -34,34 +13,8 @@ export interface SubUnitStatusCountItem {
   count: number;
 }
 
-export interface ActiveActivityItem {
-  category: number;
-  count: number;
-}
-
-export interface ActivityParticipantItem {
-  count: number;
-  category: number;
-}
-
-export interface ActivityParticipants {
-  first: ActivityParticipantItem[];
-  second: ActivityParticipantItem[];
-  third: ActivityParticipantItem[];
-  fourth: ActivityParticipantItem[];
-  fifth: ActivityParticipantItem[];
-  sixth: ActivityParticipantItem[];
-}
-
-export interface ContractItem {
-  startDate: Date;
-  endDate: Date;
-  remainingTime: string;
-}
-
-export interface CompanyInfo {
-  name: string;
-  contracts: ContractItem[];
+export interface MultiCompanyInfo extends CompanyInfo {
+  subcompanies: CompanyInfo[];
 }
 
 export interface EnterpriseStatistics {

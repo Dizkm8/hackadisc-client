@@ -4,19 +4,20 @@ import { useNavigate } from "react-router-dom";
 import useLogout from "../../auth/hooks/useLogout";
 import useUserInformation from "../../auth/hooks/useUserInformation";
 
-const userSettingsOpts = ["Mi perfil"];
 const signOutText = "Cerrar Sesión";
 
-const userInformation = {
-  email: "jorge.rivera@pignus.cl",
-  pic: "/jorge-rivera.webp",
-};
+const hardcodedPic = "/jorge-rivera.webp";
 const pignusLogoSrc = "/logo-pignus-dark.webp";
 
 const activePathClassName =
   "bg-white md:bg-transparent text-pignus-600 hover:!text-pignus-600";
 const notActivePathClassName =
   "bg-white md:bg-transparent text-white hover:!text-pignus-600";
+
+const getEmail = (username: string) => {
+  const values = username.replace(" ", ".");
+  return values.concat("@pignus.cl").toLowerCase();
+};
 
 interface NavbarOpts {
   name: string;
@@ -51,20 +52,14 @@ const Navbar = ({ pages }: Props) => {
         <Dropdown
           arrowIcon={false}
           inline
-          label={
-            <Avatar alt="User settings" img={userInformation.pic} rounded />
-          }
+          label={<Avatar alt="User settings" img={hardcodedPic} rounded />}
         >
           <Dropdown.Header>
             <span className="block text-sm">{username}</span>
             <span className="block truncate text-sm font-medium">
-              {userInformation.email}
+              {getEmail(username)}
             </span>
           </Dropdown.Header>
-          {userSettingsOpts.map((page) => (
-            <Dropdown.Item key={page}>{page}</Dropdown.Item>
-          ))}
-          <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogout}>{signOutText}</Dropdown.Item>
         </Dropdown>
         <FlowbiteNavbar.Toggle />

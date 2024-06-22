@@ -1,4 +1,3 @@
-import CButton from "../../common/components/CButton";
 import CloseModalButton from "../../common/components/CloseModalButton";
 import {
   getAptitudeESNameById,
@@ -7,12 +6,9 @@ import {
 import { ActivityDetail } from "../models/activity-detail";
 import { FaUserAltSlash } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
-import DropzoneInput from "./DropzoneInput";
 import { useState } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { FaRegFilePdf } from "react-icons/fa";
 import agent from "../../api/agent";
+import BottomActivityDetailModal from "./BottomActivityDetailModal";
 
 export const getDateText = (date: Date): string => {
   const daysOfWeek = [
@@ -42,8 +38,6 @@ export const getDateText = (date: Date): string => {
 const formTexts = {
   description: "Descripción",
   participants: "Invitados",
-  endActivity: "Añadir Documentos de Cierre",
-  sendButton: "Finalizar",
 };
 
 interface Props {
@@ -53,7 +47,6 @@ interface Props {
 
 const ActivityDetailModal = ({ activity, onClose }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
-
   const getParticipants = () => {
     if (activity.participants.length === 0)
       return (
@@ -92,7 +85,6 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
 
     const alreadyExists = files.some((file) => file.name === firstFile.name);
     if (alreadyExists) return;
-
     setFiles((prevState) => [...prevState, ...Array.from(newFiles)]);
   };
 
@@ -143,40 +135,14 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
           <p className="font-semibold mt-5">{formTexts.participants}</p>
           <div className="h-[250px] overflow-y-scroll">{getParticipants()}</div>
           <hr className="my-3 border" />
-          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            {formTexts.endActivity}
-          </h3>
-          {files && (
-            <div className="flex gap-3 flex-col">
-              {files.map(({ name }) => (
-                <div
-                  key={name}
-                  className="flex gap-3 items-center p-1 bg-gray-200 rounded-lg"
-                >
-                  <FaRegFilePdf className="w-4 h-4 ml-3" />
-                  <p className="mr-">{name}</p>
-                  <button
-                    className="rounded-full p-1"
-                    onClick={() => onFileDelete(name)}
-                  >
-                    <FaRegTrashAlt className="w-5 h-5 fill-red-500 hover:fill-red-600" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-          <DropzoneInput
-            className="p-10 mt-3 mb-5"
+          <BottomActivityDetailModal
+            staticFiles={activity.files}
+            files={files}
+            onFileDelete={onFileDelete}
+            isCompleted={activity.isCompleted}
             handleAddFiles={handleAddFiles}
+            completeActivity={completeActivity}
           />
-          <CButton
-            colorType="blue"
-            className="w-full py-1"
-            onClick={completeActivity}
-          >
-            <IoMdAdd className="mr-2 h-5 w-5" />
-            {formTexts.sendButton}
-          </CButton>
         </div>
       </div>
     </div>

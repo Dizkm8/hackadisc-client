@@ -28,8 +28,8 @@ const DropzoneInput = ({
     if (!files) {
       return;
     }
-
     handleAddFiles(Array.from(files));
+    e.target.value = "";
   };
 
   return (

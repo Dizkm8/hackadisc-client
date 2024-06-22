@@ -10,9 +10,9 @@ const hardcodedPic = "/jorge-rivera.webp";
 const pignusLogoSrc = "/logo-pignus-dark.webp";
 
 const activePathClassName =
-  "bg-white md:bg-transparent text-pignus-600 hover:!text-pignus-600";
+  "bg-white md:bg-transparent text-pignus-600 hover:!text-pignus-600 uppercase";
 const notActivePathClassName =
-  "bg-white md:bg-transparent text-white hover:!text-pignus-600";
+  "bg-white md:bg-transparent text-white hover:!text-pignus-600 uppercase";
 
 const getEmail = (username: string) => {
   const values = username.replace(" ", ".");

@@ -18,7 +18,8 @@ const completedActivityTextWithoutFiles = "No se adjuntaron archivos";
 
 interface Props {
   isCompleted: boolean;
-  files: FilesActivityDetail[];
+  files: File[];
+  staticFiles: FilesActivityDetail[];
   handleAddFiles: (files: File[]) => void;
   completeActivity: () => void;
   onFileDelete: (name: string) => void;
@@ -26,6 +27,7 @@ interface Props {
 
 const BottomActivityDetailModal = ({
   isCompleted,
+  staticFiles,
   files,
   handleAddFiles,
   completeActivity,
@@ -43,7 +45,7 @@ const BottomActivityDetailModal = ({
   };
 
   const getCompletedActivityText = () => {
-    if (files.length === 0) return completedActivityTextWithoutFiles;
+    if (staticFiles.length === 0) return completedActivityTextWithoutFiles;
     return completedActivityText;
   };
 
@@ -86,8 +88,8 @@ const BottomActivityDetailModal = ({
   const completedActivityItems = (
     <>
       <p>{getCompletedActivityText()}</p>
-      <div className="flex gap-3 flex-col">
-        {files.map(({ name, url }) => (
+      <div className="flex gap-3 flex-col h-[150px] my-1 mb-3 overflow-y-scroll">
+        {staticFiles.map(({ name, url }) => (
           <div
             key={name}
             className="flex gap-3 items-center p-1 bg-gray-200 rounded-lg"

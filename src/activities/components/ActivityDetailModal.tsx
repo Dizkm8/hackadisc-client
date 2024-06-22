@@ -85,7 +85,6 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
 
     const alreadyExists = files.some((file) => file.name === firstFile.name);
     if (alreadyExists) return;
-
     setFiles((prevState) => [...prevState, ...Array.from(newFiles)]);
   };
 
@@ -137,7 +136,8 @@ const ActivityDetailModal = ({ activity, onClose }: Props) => {
           <div className="h-[250px] overflow-y-scroll">{getParticipants()}</div>
           <hr className="my-3 border" />
           <BottomActivityDetailModal
-            files={activity.files}
+            staticFiles={activity.files}
+            files={files}
             onFileDelete={onFileDelete}
             isCompleted={activity.isCompleted}
             handleAddFiles={handleAddFiles}

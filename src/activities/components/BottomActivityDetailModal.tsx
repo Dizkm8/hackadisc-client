@@ -7,8 +7,10 @@ import {
   FaCloudDownloadAlt,
 } from "react-icons/fa";
 import { MdDoneAll } from "react-icons/md";
+import { FaDownload } from "react-icons/fa";
 
 import { FilesActivityDetail } from "../models/activity-detail";
+import { Tooltip } from "flowbite-react";
 
 const sendButtonText = "Finalizar";
 const endActivityTitle = "Añadir Documentos de Cierre";
@@ -87,7 +89,24 @@ const BottomActivityDetailModal = ({
 
   const completedActivityItems = (
     <>
-      <p>{getCompletedActivityText()}</p>
+      <div className="w-full flex justify-between mb-3">
+        <p>{getCompletedActivityText()}</p>
+        <Tooltip content="Descargar todo">
+          <FaDownload
+            className="w-6 h-6 ml-3 fill-pignus-600 mr-2"
+            onClick={() => {
+              staticFiles.forEach(({ name, url }, index) => {
+                setTimeout(() => {
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.download = name;
+                  link.click();
+                }, index * 300);
+              });
+            }}
+          />
+        </Tooltip>
+      </div>
       <div className="flex gap-3 flex-col h-[150px] my-1 mb-3 overflow-y-scroll">
         {staticFiles.map(({ name, url }) => (
           <div

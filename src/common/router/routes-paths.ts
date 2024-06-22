@@ -4,3 +4,4 @@ export const workerDetailPath = "/trabajadores/:rut";
 export const activitiesPath = "/actividades";
 export const notFoundPath = "/no-encontrado";
 export const dashboardPath = "/estadisticas";
+export const dashboardPathV2 = "/estadisticass";

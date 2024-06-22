@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, Navbar as FlowbiteNavbar } from "flowbite-react";
-import { activitiesPath, homePath, loginPath } from "../router/routes-paths";
+import { homePath, loginPath } from "../router/routes-paths";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../auth/hooks/useLogout";
 import useUserInformation from "../../auth/hooks/useUserInformation";
@@ -7,16 +7,6 @@ import useUserInformation from "../../auth/hooks/useUserInformation";
 const userSettingsOpts = ["Mi perfil"];
 const signOutText = "Cerrar Sesión";
 
-const pages = [
-  {
-    name: "Home",
-    href: homePath,
-  },
-  {
-    name: "Actividades",
-    href: activitiesPath,
-  },
-];
 const userInformation = {
   email: "jorge.rivera@pignus.cl",
   pic: "/jorge-rivera.webp",
@@ -28,7 +18,16 @@ const activePathClassName =
 const notActivePathClassName =
   "bg-white md:bg-transparent text-white hover:!text-pignus-600";
 
-const Navbar = () => {
+interface NavbarOpts {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  pages: NavbarOpts[];
+}
+
+const Navbar = ({ pages }: Props) => {
   const { logout } = useLogout();
   const navigate = useNavigate();
   const { username } = useUserInformation();

@@ -47,7 +47,6 @@ const EnterpriseTable = () => {
     agent.Dashboard.adminCompaniesStatistics()
       .then((response: GetEnterpriseSummaryDto) => {
         const { results } = response;
-        console.log(response)
         setEnterpriseData(mapEnterpriseSummaryItemDtoToEnterpriseSummaryItem(results));
         enterprisesRef.current = mapEnterpriseSummaryItemDtoToEnterpriseSummaryItem(results);
       })

@@ -18,7 +18,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     agent.Dashboard.adminStatistics()
       .then((response: GetCommonStatisticsDto) => {
-        setStats(mapGetCommonStatisticsDtoStatistics(response));
+        const mappedValues = mapGetCommonStatisticsDtoStatistics(response);
+        setStats(mappedValues);
       })
       .catch((error) => {
         console.error(error);
@@ -47,10 +48,10 @@ const AdminDashboard = () => {
         activityParticipants={stats.activitiesParticipants}
       />
       <hr className="md:hidden mt-5 md:mt-10 border-2 border-gray-100" />
-      
+
       <ActiveActivitiesPie activeActivities={stats.activeActivities} />
 
-      <div className="col-span-2" >
+      <div className="col-span-2">
         <EnterpriseTable />
       </div>
     </div>

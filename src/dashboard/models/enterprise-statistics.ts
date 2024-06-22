@@ -1,14 +1,6 @@
-import {
-  AptitudeScoreAverage,
-  GradeCount,
-  StatusCountItem,
-  ActiveActivityItem,
-  ActivityParticipants,
-  Statistics,
-  CompanyInfo,
-} from "./common-statistics";
+import { StatusCountItem, Statistics, CompanyInfo } from "./common-statistics";
 
-export interface SubUnitStatusCountItem extends StatusCountItem{
+export interface SubUnitStatusCountItem extends StatusCountItem {
   areaId: number;
 }
 

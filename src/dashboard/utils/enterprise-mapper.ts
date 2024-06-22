@@ -1,37 +1,25 @@
-import {
-  ActiveInterventionItemDto,
-  CompanyInfoDto,
-  CompetenceScoreAverageDto,
-  ContractItemDto,
-  GradeCountDto,
-  GradeCountItemDto,
-  InterventionParticipantItemDto,
-  InterventionParticipantsDto,
-  StateCountItemDto,
-} from "../../api/dtos/dashboards/get-common-statistics";
+import { CompanyInfoDto } from "../../api/dtos/dashboards/get-common-statistics";
 import {
   SubUnitStateCountItemDto,
   GetAllCompanyStatisticsDto,
   MultiCompanyInfoDto,
 } from "../../api/dtos/dashboards/get-all-company-statistics";
-import {
-  ActiveActivityItem,
-  ActivityParticipantItem,
-  ActivityParticipants,
-  AptitudeScoreAverage,
-  CompanyInfo,
-  ContractItem,
-  GradeCount,
-  GradeCountItem,
-  StatusCountItem,
-} from "../models/common-statistics";
+import { CompanyInfo } from "../models/common-statistics";
 
 import {
   EnterpriseStatistics,
   MultiCompanyInfo,
   SubUnitStatusCountItem,
 } from "../models/enterprise-statistics";
-import { mapActiveInterventionItemDtoToActiveActivityItem, mapCompanyInfoDtoToCompanyInfo, mapCompetenceScoreAverageDtoToAptitudeScoreAverage, mapContractItemDtoToContractItem, mapGradeCountDtoToGradeCount, mapInterventionParticipantsDtoToActivityParticipants, mapStateCountItemDtoToStatusCountItem } from "./mapper";
+import {
+  mapActiveInterventionItemDtoToActiveActivityItem,
+  mapCompanyInfoDtoToCompanyInfo,
+  mapCompetenceScoreAverageDtoToAptitudeScoreAverage,
+  mapContractItemDtoToContractItem,
+  mapGradeCountDtoToGradeCount,
+  mapInterventionParticipantsDtoToActivityParticipants,
+  mapStateCountItemDtoToStatusCountItem,
+} from "./mapper";
 
 export const mapSubUnitStateCountItemDtoToSubUnitStatusCountItem = (
   dto: SubUnitStateCountItemDto[]
@@ -47,15 +35,18 @@ export const mapMultiCompanyInfoDtoToCompanyInfo = (
   dto: MultiCompanyInfoDto | CompanyInfoDto
 ): MultiCompanyInfo | CompanyInfo => {
   if ("sub_companies" in dto) {
+    const mappedSubCompanies = dto.sub_companies
+      .map(mapCompanyInfoDtoToCompanyInfo)
+      .filter((item) => item) as CompanyInfo[];
+
     return {
       name: dto.name,
       contracts: mapContractItemDtoToContractItem(dto.contracts),
-      subcompanies: dto.sub_companies.map(mapCompanyInfoDtoToCompanyInfo),
+      subcompanies: mappedSubCompanies,
     };
   }
-  else {
-    return mapCompanyInfoDtoToCompanyInfo(dto);
-  }
+
+  return mapCompanyInfoDtoToCompanyInfo(dto) as CompanyInfo;
 };
 
 export const mapGetAllCompanyStatisticsDtoToEnterpriseStatistics = (

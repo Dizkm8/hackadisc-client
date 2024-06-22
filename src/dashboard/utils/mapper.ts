@@ -121,9 +121,11 @@ export const mapContractItemDtoToContractItem = (
 };
 
 export const mapCompanyInfoDtoToCompanyInfo = (
-  dto: CompanyInfoDto | undefined
+  dto?: CompanyInfoDto
 ): CompanyInfo | undefined => {
-  return dto && {
+  if (!dto) return undefined;
+
+  return {
     name: dto.name,
     contracts: mapContractItemDtoToContractItem(dto.contracts),
   };

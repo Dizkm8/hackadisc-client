@@ -62,6 +62,10 @@ const Dashboard = {
     requests.get("api/dashboard/admin/companies/"),
 };
 
-const agent = { Auth, UsersWorkers, Activities, Dashboard };
+const Chatbot = {
+  sendMessage: (prompt: string) => requests.post("api/chatbot/", { prompt }),
+};
+
+const agent = { Auth, UsersWorkers, Activities, Dashboard, Chatbot };
 
 export default agent;

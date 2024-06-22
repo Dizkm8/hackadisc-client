@@ -1,6 +1,9 @@
 import { useState } from "react";
 import AIIcon from "./AIIcon";
 import { IoIosSend } from "react-icons/io";
+import agent from "../../api/agent";
+import { ChatbotResponseDto } from "../../api/dtos/chatbot/chatbot-response-dto";
+import WaitingMessageSpinner from "./WaitingMessageSpinner";
 
 const bot = {
   name: "Selene",
@@ -56,6 +59,7 @@ const getBotMessage = (content: string) => {
 };
 
 const AIChat = () => {
+  const [waitingResponse, setWaitingResponse] = useState(false);
   const [messages, setMessages] = useState<Message[]>(defaultMessages);
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +76,33 @@ const AIChat = () => {
         role: "user",
       },
     ]);
+    setWaitingResponse(true);
     (input as HTMLInputElement).value = "";
+    agent.Chatbot.sendMessage(value)
+      .then((res: ChatbotResponseDto) => {
+        const { response } = res;
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: prev.length + 1,
+            content: response,
+            role: "bot",
+          },
+        ]);
+      })
+      .catch(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: prev.length + 1,
+            content: "Lo siento, no puedo responder a eso.",
+            role: "bot",
+          },
+        ]);
+      })
+      .finally(() => {
+        setWaitingResponse(false);
+      });
   };
 
   return (
@@ -89,6 +119,18 @@ const AIChat = () => {
             message.role === "bot"
               ? getBotMessage(message.content)
               : getUserMessage(message.content)
+          )}
+          {waitingResponse && (
+            <div className="flex items-start px-3">
+              <AIIcon />
+              <div
+                className={`ml-3 bg-gray-100 p-3 rounded-lg ${messageWidth}`}
+              >
+                <p className="text-sm text-gray-800">
+                  <WaitingMessageSpinner />
+                </p>
+              </div>
+            </div>
           )}
         </div>
         <form

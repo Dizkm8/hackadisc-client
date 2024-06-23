@@ -16,7 +16,7 @@ const AboutUsPage = () => {
         </p>
         <img
           className="w-full lg:w-1/2 shadow-xl rounded-sm"
-          src="/joge.webp"
+          src="/jorge-rivera.webp"
           alt="Desarrollador FullStack Joge"
         />
       </div>

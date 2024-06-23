@@ -1,30 +1,28 @@
-# React + TypeScript + Vite
+# HackaDISC Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Client para evento [HackaDISC](https://www.instagram.com/p/C8IeO40P5RL/) para incorporar un modulo de trazabilidad de clientes en la plataforma Rehaviour de [PIGNUS](https://www.pignus.cl/rehaviour/). Este proyecto incluye gestión de usuarios, chat con IA mediante openAI, envio de notificaciones por Correo (SMTP), cálculo de estadísticas, este otros.
 
-Currently, two official plugins are available:
+## Prerequisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. [Node](https://nodejs.org/en/blog/release/v20.14.0) versión 20.x.x.
+2. Puerto 5173 disponible.
 
-## Expanding the ESLint configuration
+## Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Instalar las dependencias del proyecto:
+   ```bash
+    npm install
+   ```
+2. Iniciar la aplicación
+    ```bash
+      npm run dev
+    ```
 
-- Configure the top-level `parserOptions` property like this:
+3. La aplicación estará disponible en [http://localhost:5173](http://localhost:5173)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Autores
+Proyecto diseñado y desarrollado por:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **David Araya** - [Linkedin](https://www.linkedin.com/in/david-araya-cadiz/)
+- **Ignacia Rivas** - [Linkedin](https://www.linkedin.com/in/ignacia-rivas-figueroa-474554257/)
+- **José Alcayaga**  - [Linkedin](https://www.linkedin.com/in/jose-manuel-alcayaga-marin-88a58926/)

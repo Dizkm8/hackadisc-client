@@ -3,6 +3,7 @@ import Root from "./Root";
 import Login from "../../auth/Login";
 import HomePage from "../../home/Page";
 import {
+  aboutUsPath,
   activitiesPath,
   dashboardPath,
   homePath,
@@ -23,6 +24,7 @@ import {
 } from "../../api/constants/roles";
 import DashboardPage from "../../dashboard/pages/Page";
 import WorkersPage from "../../workers/pages/Page";
+import AboutUsPage from "../../about-us/AboutUs";
 
 const Router = createBrowserRouter([
   {
@@ -33,6 +35,10 @@ const Router = createBrowserRouter([
       {
         path: loginPath,
         element: <Login />,
+      },
+      {
+        path: aboutUsPath,
+        element: <AboutUsPage />,
       },
       {
         element: (
